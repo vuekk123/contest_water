@@ -279,7 +279,9 @@ onUnmounted(() => {
       </el-col>
     </el-row>
     <el-row>
-      <div style="width: 100%; background-color: black; height: 200px"></div>
+      <div style="width: 100%; background-color: black; height: 200px">
+        then
+      </div>
     </el-row>
   </div>
 </template>
