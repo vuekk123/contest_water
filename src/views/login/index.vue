@@ -206,7 +206,6 @@ const loadtrue = () => {
             @load="loadtrue"
           />
         </div>
-        <!-- <component :is="waterbox" style="position: absolute; z-index: 999" /> -->
       </div>
       <div class="login-box">
         <div class="login-form">
