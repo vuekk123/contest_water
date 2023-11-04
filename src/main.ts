@@ -8,10 +8,12 @@ import { createApp, Directive } from "vue";
 import { MotionPlugin } from "@vueuse/motion";
 import { useEcharts } from "@/plugins/echarts";
 import { injectResponsiveStorage } from "@/utils/responsive";
-
 import Table from "@pureadmin/table";
 import PureDescriptions from "@pureadmin/descriptions";
 
+import VueIconFont from 'vue-icon-font'
+import '@/assets/iconfont/iconfont.css'
+import '@/assets/iconfont/iconfont.js'
 // 引入重置样式
 import "./style/reset.scss";
 // 导入公共样式
@@ -24,7 +26,6 @@ import "./assets/iconfont/iconfont.js";
 import "./assets/iconfont/iconfont.css";
 
 const app = createApp(App);
-
 // 自定义指令
 import * as directives from "@/directives";
 Object.keys(directives).forEach(key => {
@@ -56,6 +57,7 @@ getPlatformConfig(app).then(async config => {
     .use(ElementPlus)
     .use(Table)
     .use(PureDescriptions)
-    .use(useEcharts);
+    .use(useEcharts)
+    .use(VueIconFont);
   app.mount("#app");
 });

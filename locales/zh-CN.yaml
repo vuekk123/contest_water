@@ -95,6 +95,7 @@ menus:
   hsTimeline: 时间线
   hsLineTree: 树形连接线
   hsList: 列表页
+  hsdevice: 设备管理
   hsListCard: 成绩列表页
   hsDebounce: 防抖节流
   hsFormDesign: 表单设计器

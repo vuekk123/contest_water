@@ -41,26 +41,25 @@ onBeforeMount(() => {
   if (!instance) return;
   const { MapConfigure } = instance.appContext.config.globalProperties.$config;
   const { options } = MapConfigure;
-
   AMapLoader.load({
     key: MapConfigure.amapKey,
     version: "2.0",
-    plugins: ["AMap.MarkerCluster"]
+    plugins: []
   })
     .then(AMap => {
       // 创建地图实例
       map = new AMap.Map(instance.refs.mapview, options);
 
       //地图中添加地图操作ToolBar插件
-      map.plugin(["AMap.ToolBar", "AMap.MapType"], () => {
-        map.addControl(new AMap.ToolBar());
-        //地图类型切换
-        map.addControl(
-          new AMap.MapType({
-            defaultType: 0
-          })
-        );
-      });
+      // map.plugin(["AMap.ToolBar", "AMap.MapType"], () => {
+      //   map.addControl(new AMap.ToolBar());
+      //   //地图类型切换
+      //   map.addControl(
+      //     new AMap.MapType({
+      //       defaultType: 0
+      //     })
+      //   );
+      // });
 
       MarkerCluster = new AMap.MarkerCluster(map, [], {
         // 聚合网格像素大小
@@ -91,19 +90,20 @@ onBeforeMount(() => {
       });
 
       // 获取模拟车辆信息
-      mapJson()
-        .then(({ data }) => {
-          const points: object = data.map(v => {
-            return {
-              lnglat: [v.lng, v.lat],
-              ...v
-            };
-          });
-          if (MarkerCluster) MarkerCluster.setData(points);
-        })
-        .catch(err => {
-          console.log("err:", err);
-        });
+      // mapJson()
+      //   .then(({ data }) => {
+      //     const points: object = data.map(v => {
+      //       return {
+      //         lnglat: [v.lng, v.lat],
+
+      //         ...v
+      //       };
+      //     });
+      //     if (MarkerCluster) MarkerCluster.setData(points);
+      //   })
+      //   .catch(err => {
+      //     console.log("err:", err);
+      //   });
 
       complete();
     })
@@ -127,7 +127,8 @@ onUnmounted(() => {
 
 <style lang="scss" scoped>
 #mapview {
-  height: calc(100vh - 86px);
+  height: 650px;
+  width: 837px;
 }
 
 :deep(.amap-marker-label) {

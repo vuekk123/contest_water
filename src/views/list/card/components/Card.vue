@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { computed, PropType } from "vue";
-import shopIcon from "@/assets/svg/shop.svg?component";
-import laptopIcon from "@/assets/svg/laptop.svg?component";
+import Cameras from "@/assets/device/view.svg?component";
+import laptopIcon from "@/assets/device/gateway.svg?component";
 import serviceIcon from "@/assets/svg/service.svg?component";
 import calendarIcon from "@/assets/svg/calendar.svg?component";
 import userAvatarIcon from "@/assets/svg/user_avatar.svg?component";
 import More2Fill from "@iconify-icons/ri/more-2-fill";
+import device from "@/assets/icons/svg/device.svg?component";
 
 defineOptions({
   name: "ReCard"
@@ -49,47 +50,98 @@ const cardLogoClass = computed(() => [
   <div :class="cardClass">
     <div class="list-card-item_detail bg-bg_color">
       <el-row justify="space-between">
-        <div :class="cardLogoClass">
-          <shopIcon v-if="product.type === 1" />
+        <div
+          style="
+            display: flex;
+            width: 100%;
+            height: 30%;
+            justify-content: space-between;
+          "
+        >
+          <div style="display: flex; align-items: center">
+            <component :is="device" style="margin-right: 5px"></component
+            >{{ product.product }}
+          </div>
+          <div class="list-card-item_detail--operation">
+            <el-tag
+              :color="product.isSetup ? '#00a870' : '#eee'"
+              effect="dark"
+              class="mx-1 list-card-item_detail--operation--tag"
+            >
+              {{ product.isSetup ? "已启用" : "已停用" }}
+            </el-tag>
+            <el-dropdown trigger="click" :disabled="!product.isSetup">
+              <IconifyIconOffline :icon="More2Fill" class="text-[24px]" />
+              <template #dropdown>
+                <el-dropdown-menu :disabled="!product.isSetup">
+                  <el-dropdown-item @click="handleClickManage(product)">
+                    管理
+                  </el-dropdown-item>
+                  <el-dropdown-item @click="handleClickDelete(product)">
+                    删除
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+          </div>
+        </div>
+        <!-- <div :class="cardLogoClass">
+          <Cameras v-if="product.type === 1" />
           <calendarIcon v-if="product.type === 2" />
           <serviceIcon v-if="product.type === 3" />
           <userAvatarIcon v-if="product.type === 4" />
           <laptopIcon v-if="product.type === 5" />
-        </div>
-        <div class="list-card-item_detail--operation">
-          <el-tag
-            :color="product.isSetup ? '#00a870' : '#eee'"
-            effect="dark"
-            class="mx-1 list-card-item_detail--operation--tag"
-          >
-            {{ product.isSetup ? "已启用" : "已停用" }}
-          </el-tag>
-          <el-dropdown trigger="click" :disabled="!product.isSetup">
-            <IconifyIconOffline :icon="More2Fill" class="text-[24px]" />
-            <template #dropdown>
-              <el-dropdown-menu :disabled="!product.isSetup">
-                <el-dropdown-item @click="handleClickManage(product)">
-                  管理
-                </el-dropdown-item>
-                <el-dropdown-item @click="handleClickDelete(product)">
-                  删除
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
+        </div> -->
+      </el-row>
+      <el-row>
+        <div
+          style="
+            display: flex;
+            width: 100%;
+            height: 70%;
+            align-items: center;
+            justify-content: space-between;
+          "
+        >
+          <div>
+            <p class="list-card-item_detail--name text-text_color_primary">
+              {{ product.name }}
+            </p>
+            <p
+              class="list-card-item_detail--desc text-text_color_regular marginbottomzero"
+            >
+              编号:{{ product.number }}
+            </p>
+            <p
+              class="list-card-item_detail--desc text-text_color_regular marginbottomzero"
+            >
+              产品:{{ product.product }}
+            </p>
+            <p
+              class="list-card-item_detail--desc text-text_color_regular marginbottomzero"
+            >
+              激活时间:{{ product.activate }}
+            </p>
+          </div>
+          <div>
+            <div :class="cardLogoClass" style="margin-right: 20px">
+              <Cameras v-if="product.type === 1" />
+              <calendarIcon v-if="product.type === 2" />
+              <serviceIcon v-if="product.type === 3" />
+              <userAvatarIcon v-if="product.type === 4" />
+              <laptopIcon v-if="product.type === 5" />
+            </div>
+          </div>
         </div>
       </el-row>
-      <p class="list-card-item_detail--name text-text_color_primary">
-        {{ product.name }}
-      </p>
-      <p class="list-card-item_detail--desc text-text_color_regular">
-        {{ product.description }}
-      </p>
     </div>
   </div>
 </template>
 
 <style scoped lang="scss">
+.marginbottomzero {
+  margin-bottom: 0 !important;
+}
 .list-card-item {
   display: flex;
   flex-direction: column;
@@ -136,7 +188,7 @@ const cardLogoClass = computed(() => [
 
     &--desc {
       display: -webkit-box;
-      height: 40px;
+      height: 30px;
       margin-bottom: 24px;
       overflow: hidden;
       font-size: 12px;

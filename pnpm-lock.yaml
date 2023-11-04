@@ -131,9 +131,15 @@ dependencies:
   vue:
     specifier: ^3.3.7
     version: 3.3.7(typescript@5.2.2)
+  vue-baidu-map-3x:
+    specifier: ^1.0.35
+    version: registry.npmmirror.com/vue-baidu-map-3x@1.0.35(vue@3.3.7)
   vue-i18n:
     specifier: ^9.6.2
     version: 9.6.2(vue@3.3.7)
+  vue-icon-font:
+    specifier: ^1.0.4
+    version: registry.npmmirror.com/vue-icon-font@1.0.4
   vue-json-pretty:
     specifier: ^2.2.4
     version: 2.2.4(vue@3.3.7)
@@ -1673,8 +1679,8 @@ packages:
   /@types/babel__core@7.20.3:
     resolution: {integrity: sha512-54fjTSeSHwfan8AyHWrKbfBWiEUrNTZsUwPTDSNaaP1QDQIZbeNUg3a59E9D+375MzUw/x1vx2/0F5LBz+AeYA==}
     dependencies:
-      '@babel/parser': 7.23.0
-      '@babel/types': 7.23.0
+      '@babel/parser': registry.npmmirror.com/@babel/parser@7.23.0
+      '@babel/types': registry.npmmirror.com/@babel/types@7.23.0
       '@types/babel__generator': 7.6.6
       '@types/babel__template': 7.4.3
       '@types/babel__traverse': 7.20.3
@@ -1683,20 +1689,20 @@ packages:
   /@types/babel__generator@7.6.6:
     resolution: {integrity: sha512-66BXMKb/sUWbMdBNdMvajU7i/44RkrA3z/Yt1c7R5xejt8qh84iU54yUWCtm0QwGJlDcf/gg4zd/x4mpLAlb/w==}
     dependencies:
-      '@babel/types': 7.23.0
+      '@babel/types': registry.npmmirror.com/@babel/types@7.23.0
     dev: false
 
   /@types/babel__template@7.4.3:
     resolution: {integrity: sha512-ciwyCLeuRfxboZ4isgdNZi/tkt06m8Tw6uGbBSBgWrnnZGNXiEyM27xc/PjXGQLqlZ6ylbgHMnm7ccF9tCkOeQ==}
     dependencies:
-      '@babel/parser': 7.23.0
-      '@babel/types': 7.23.0
+      '@babel/parser': registry.npmmirror.com/@babel/parser@7.23.0
+      '@babel/types': registry.npmmirror.com/@babel/types@7.23.0
     dev: false
 
   /@types/babel__traverse@7.20.3:
     resolution: {integrity: sha512-Lsh766rGEFbaxMIDH7Qa+Yha8cMVI3qAK6CHt3OR0YfxOIn5Z54iHiyDRycHrBqeIiqGa20Kpsv1cavfBKkRSw==}
     dependencies:
-      '@babel/types': 7.23.0
+      '@babel/types': registry.npmmirror.com/@babel/types@7.23.0
     dev: false
 
   /@types/estree@0.0.39:
@@ -2084,7 +2090,7 @@ packages:
   /@vue/compiler-core@3.3.7:
     resolution: {integrity: sha512-pACdY6YnTNVLXsB86YD8OF9ihwpolzhhtdLVHhBL6do/ykr6kKXNYABRtNMGrsQXpEXXyAdwvWWkuTbs4MFtPQ==}
     dependencies:
-      '@babel/parser': 7.23.0
+      '@babel/parser': registry.npmmirror.com/@babel/parser@7.23.0
       '@vue/shared': 3.3.7
       estree-walker: 2.0.2
       source-map-js: 1.0.2
@@ -2214,7 +2220,7 @@ packages:
   /@vue/reactivity-transform@3.3.7:
     resolution: {integrity: sha512-APhRmLVbgE1VPGtoLQoWBJEaQk4V8JUsqrQihImVqKT+8U6Qi3t5ATcg4Y9wGAPb3kIhetpufyZ1RhwbZCIdDA==}
     dependencies:
-      '@babel/parser': 7.23.0
+      '@babel/parser': registry.npmmirror.com/@babel/parser@7.23.0
       '@vue/compiler-core': 3.3.7
       '@vue/shared': 3.3.7
       estree-walker: 2.0.2
@@ -2669,11 +2675,6 @@ packages:
     dependencies:
       color-convert: 2.0.1
 
-  /ansi-styles@5.2.0:
-    resolution: {integrity: sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA==}
-    engines: {node: '>=10'}
-    dev: false
-
   /ansi-styles@6.2.1:
     resolution: {integrity: sha512-bN798gFfQX+viw3R7yrGWRqnrN2oRkEkUjjl4JNn4E8GxxbjtG3FbrEIIY3l8/hrwUwIeCZvi4QuOTP4MErVug==}
     engines: {node: '>=12'}
@@ -2696,12 +2697,6 @@ packages:
   /arg@5.0.2:
     resolution: {integrity: sha512-PYjyFOLKQ9y57JvQ6QLo8dAgNqswh8M1RMJYdQduT6xbWSgK36P/Z/v+p888pM69jMMfS8Xd8F6I1kQ/I9HUGg==}
     dev: true
-
-  /argparse@1.0.10:
-    resolution: {integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==}
-    dependencies:
-      sprintf-js: 1.0.3
-    dev: false
 
   /argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
@@ -2806,7 +2801,7 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       '@babel/template': 7.22.15
-      '@babel/types': 7.23.0
+      '@babel/types': registry.npmmirror.com/@babel/types@7.23.0
       '@types/babel__core': 7.20.3
       '@types/babel__traverse': 7.20.3
     dev: false
@@ -3095,7 +3090,7 @@ packages:
   /cliui@7.0.4:
     resolution: {integrity: sha512-OcRE68cOsVMXp1Yvonl/fzkQOyjLSu/8bhPDfQt0e0/Eb283TKP20Fs2MqoPsr9SwA595rRCA+QMzYc9nBP+JQ==}
     dependencies:
-      string-width: 4.2.3
+      string-width: registry.npmmirror.com/string-width@4.2.3
       strip-ansi: registry.npmmirror.com/strip-ansi@6.0.1
       wrap-ansi: 7.0.0
     dev: false
@@ -3738,7 +3733,7 @@ packages:
     dependencies:
       domelementtype: 2.3.0
       domhandler: 4.3.1
-      entities: 2.2.0
+      entities: registry.npmmirror.com/entities@2.2.0
     dev: true
 
   /dom-serializer@2.0.0:
@@ -3746,7 +3741,7 @@ packages:
     dependencies:
       domelementtype: 2.3.0
       domhandler: 5.0.3
-      entities: 4.5.0
+      entities: registry.npmmirror.com/entities@4.5.0
     dev: true
 
   /dom7@3.0.0:
@@ -3899,10 +3894,6 @@ packages:
       tapable: 1.1.3
     dev: false
     optional: true
-
-  /entities@2.2.0:
-    resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==}
-    dev: true
 
   /entities@4.5.0:
     resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
@@ -4988,7 +4979,7 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       '@babel/core': 7.23.0
-      '@babel/parser': 7.23.0
+      '@babel/parser': registry.npmmirror.com/@babel/parser@7.23.0
       '@istanbuljs/schema': 0.1.3
       istanbul-lib-coverage: 3.2.0
       semver: 6.3.1
@@ -5411,7 +5402,7 @@ packages:
       '@babel/generator': 7.23.0
       '@babel/plugin-syntax-typescript': 7.22.5(@babel/core@7.23.0)
       '@babel/traverse': 7.23.0
-      '@babel/types': 7.23.0
+      '@babel/types': registry.npmmirror.com/@babel/types@7.23.0
       '@jest/transform': 27.5.1
       '@jest/types': 27.5.1
       '@types/babel__traverse': 7.20.3
@@ -5520,7 +5511,7 @@ packages:
     resolution: {integrity: sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==}
     hasBin: true
     dependencies:
-      argparse: 1.0.10
+      argparse: registry.npmmirror.com/argparse@1.0.10
       esprima: 4.0.1
     dev: false
 
@@ -7222,7 +7213,7 @@ packages:
     engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
     dependencies:
       ansi-regex: registry.npmmirror.com/ansi-regex@5.0.1
-      ansi-styles: 5.2.0
+      ansi-styles: registry.npmmirror.com/ansi-styles@5.2.0
       react-is: 17.0.2
     dev: false
 
@@ -7781,10 +7772,6 @@ packages:
       readable-stream: 3.6.2
     dev: true
 
-  /sprintf-js@1.0.3:
-    resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
-    dev: false
-
   /ssf@0.11.2:
     resolution: {integrity: sha512-+idbmIXoYET47hH+d7dfm2epdOMUDjqcB4648sTZ+t2JwoyBFL/insLfB/racrDmsKB3diwsDA696pZMieAC5g==}
     engines: {node: '>=0.8'}
@@ -8189,7 +8176,7 @@ packages:
       css-select: 4.3.0
       css-tree: 1.1.3
       csso: 4.2.0
-      picocolors: 1.0.0
+      picocolors: registry.npmmirror.com/picocolors@1.0.0
       stable: 0.1.8
     dev: true
 
@@ -9295,6 +9282,37 @@ packages:
       tslib: 2.3.0
     dev: false
 
+  registry.npmmirror.com/@babel/helper-string-parser@7.22.5:
+    resolution: {integrity: sha512-mM4COjgZox8U+JcXQwPijIZLElkgEpO5rsERVDJTc2qfCDfERyob6k5WegS14SX18IIjv+XD+GrqNumY5JRCDw==, tarball: https://registry.npmmirror.com/@babel/helper-string-parser/-/helper-string-parser-7.22.5.tgz}
+    name: '@babel/helper-string-parser'
+    version: 7.22.5
+    engines: {node: '>=6.9.0'}
+
+  registry.npmmirror.com/@babel/helper-validator-identifier@7.22.20:
+    resolution: {integrity: sha512-Y4OZ+ytlatR8AI+8KZfKuL5urKp7qey08ha31L8b3BwewJAoJamTzyvxPR/5D+KkdJCGPq/+8TukHBlY10FX9A==, tarball: https://registry.npmmirror.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.22.20.tgz}
+    name: '@babel/helper-validator-identifier'
+    version: 7.22.20
+    engines: {node: '>=6.9.0'}
+
+  registry.npmmirror.com/@babel/parser@7.23.0:
+    resolution: {integrity: sha512-vvPKKdMemU85V9WE/l5wZEmImpCtLqbnTvqDS2U1fJ96KrxoW7KrXhNsNCblQlg8Ck4b85yxdTyelsMUgFUXiw==, tarball: https://registry.npmmirror.com/@babel/parser/-/parser-7.23.0.tgz}
+    name: '@babel/parser'
+    version: 7.23.0
+    engines: {node: '>=6.0.0'}
+    hasBin: true
+    dependencies:
+      '@babel/types': registry.npmmirror.com/@babel/types@7.23.0
+
+  registry.npmmirror.com/@babel/types@7.23.0:
+    resolution: {integrity: sha512-0oIyUfKoI3mSqMvsxBdclDwxXKXAUA8v/apZbc+iSyARYou1o8ZGDxbUYyLFoW2arqS2jDGqJuZvv1d/io1axg==, tarball: https://registry.npmmirror.com/@babel/types/-/types-7.23.0.tgz}
+    name: '@babel/types'
+    version: 7.23.0
+    engines: {node: '>=6.9.0'}
+    dependencies:
+      '@babel/helper-string-parser': registry.npmmirror.com/@babel/helper-string-parser@7.22.5
+      '@babel/helper-validator-identifier': registry.npmmirror.com/@babel/helper-validator-identifier@7.22.20
+      to-fast-properties: registry.npmmirror.com/to-fast-properties@2.0.0
+
   registry.npmmirror.com/@esbuild/android-arm64@0.18.20:
     resolution: {integrity: sha512-Nz4rJcchGDtENV0eMKUNa6L12zz2zBDXuhj/Vjh18zGqB44Bi7MBMSXjgunJgjRhCmKOjnPuZp4Mb6OKqtMHLQ==, tarball: https://registry.npmmirror.com/@esbuild/android-arm64/-/android-arm64-0.18.20.tgz}
     name: '@esbuild/android-arm64'
@@ -9583,6 +9601,22 @@ packages:
     version: 2.11.7
     dev: false
 
+  registry.npmmirror.com/@vue/compiler-sfc@2.7.15:
+    resolution: {integrity: sha512-FCvIEevPmgCgqFBH7wD+3B97y7u7oj/Wr69zADBf403Tui377bThTjBvekaZvlRr4IwUAu3M6hYZeULZFJbdYg==, tarball: https://registry.npmmirror.com/@vue/compiler-sfc/-/compiler-sfc-2.7.15.tgz}
+    name: '@vue/compiler-sfc'
+    version: 2.7.15
+    dependencies:
+      '@babel/parser': registry.npmmirror.com/@babel/parser@7.23.0
+      postcss: registry.npmmirror.com/postcss@8.4.31
+      source-map: registry.npmmirror.com/source-map@0.6.1
+    dev: false
+
+  registry.npmmirror.com/@vue/devtools-api@6.5.0:
+    resolution: {integrity: sha512-o9KfBeaBmCKl10usN4crU53fYtC1r7jJwdGKjPT24t348rHxgfpZ0xL3Xm/gLUYnc0oTp8LAmrxOeLyu6tbk2Q==, tarball: https://registry.npmmirror.com/@vue/devtools-api/-/devtools-api-6.5.0.tgz}
+    name: '@vue/devtools-api'
+    version: 6.5.0
+    dev: false
+
   registry.npmmirror.com/ansi-regex@5.0.1:
     resolution: {integrity: sha512-quJQXlTSUGL2LH9SUXo8VwsY4soanhgo6LNSm84E1LBcE8s3O0wpdiRzyR9z/ZZJMlMWv37qOOb9pdJlMUEKFQ==, tarball: https://registry.npmmirror.com/ansi-regex/-/ansi-regex-5.0.1.tgz}
     name: ansi-regex
@@ -9597,6 +9631,59 @@ packages:
     dependencies:
       color-convert: registry.npmmirror.com/color-convert@2.0.1
     dev: true
+
+  registry.npmmirror.com/ansi-styles@5.2.0:
+    resolution: {integrity: sha512-Cxwpt2SfTzTtXcfOlzGEee8O+c+MmUgGrNiBcXnuWxuFJHe6a5Hz7qwhwe5OgaSYI0IJvkLqWX1ASG+cJOkEiA==, tarball: https://registry.npmmirror.com/ansi-styles/-/ansi-styles-5.2.0.tgz}
+    name: ansi-styles
+    version: 5.2.0
+    engines: {node: '>=10'}
+    dev: false
+
+  registry.npmmirror.com/argparse@1.0.10:
+    resolution: {integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==, tarball: https://registry.npmmirror.com/argparse/-/argparse-1.0.10.tgz}
+    name: argparse
+    version: 1.0.10
+    dependencies:
+      sprintf-js: registry.npmmirror.com/sprintf-js@1.0.3
+    dev: false
+
+  registry.npmmirror.com/bmaplib.curveline@1.0.0:
+    resolution: {integrity: sha512-9wcFMVhiYxNPqpvsLDAADn3qDhNzXp2mA6VyHSHg2XOAgSooC7ZiujdFhy0sp+0QYjTfJ/MjmLuNoUg2HHxH4Q==, tarball: https://registry.npmmirror.com/bmaplib.curveline/-/bmaplib.curveline-1.0.0.tgz}
+    name: bmaplib.curveline
+    version: 1.0.0
+    dev: false
+
+  registry.npmmirror.com/bmaplib.distancetool@1.0.2:
+    resolution: {integrity: sha512-EvxMnQRH6xM036zx5OLPyTg5tMCTbFBuGTTHOtExLy2/T0X6v5Va0YE7c3IPm/a/Eo5V/ynYpOLOLZbRY8ccyA==, tarball: https://registry.npmmirror.com/bmaplib.distancetool/-/bmaplib.distancetool-1.0.2.tgz}
+    name: bmaplib.distancetool
+    version: 1.0.2
+    dev: false
+
+  registry.npmmirror.com/bmaplib.heatmap@1.0.4:
+    resolution: {integrity: sha512-rmhqUARBpUSJ9jXzUI2j7dIOqnc38bqubkx/8a349U2qtw/ulLUwyzRD535OrA8G7w5cz4aPKm6/rNvUAarg/Q==, tarball: https://registry.npmmirror.com/bmaplib.heatmap/-/bmaplib.heatmap-1.0.4.tgz}
+    name: bmaplib.heatmap
+    version: 1.0.4
+    dev: false
+
+  registry.npmmirror.com/bmaplib.lushu@1.0.7:
+    resolution: {integrity: sha512-LVvgpESPii6xGxyjnQjq8u+ic4NjvhdCPV/RiSS/PGTUdZKeTDS7prSpleJLZH3ES0+oc0gYn8bw0LtPYUSz2w==, tarball: https://registry.npmmirror.com/bmaplib.lushu/-/bmaplib.lushu-1.0.7.tgz}
+    name: bmaplib.lushu
+    version: 1.0.7
+    dev: false
+
+  registry.npmmirror.com/bmaplib.markerclusterer@1.0.13:
+    resolution: {integrity: sha512-VrLyWSiuDEVNi0yUfwOhFQ6z1oEEHS4w36GNu3iASu6p52QIx9uAXMUkuSCHReNR0bj2Cp9SA1dSx5RpojXajQ==, tarball: https://registry.npmmirror.com/bmaplib.markerclusterer/-/bmaplib.markerclusterer-1.0.13.tgz}
+    name: bmaplib.markerclusterer
+    version: 1.0.13
+    dependencies:
+      bmaplib.texticonoverlay: registry.npmmirror.com/bmaplib.texticonoverlay@1.0.2
+    dev: false
+
+  registry.npmmirror.com/bmaplib.texticonoverlay@1.0.2:
+    resolution: {integrity: sha512-4ZTWr4ZP3B6qEWput5Tut16CfZgII38YwM3bpyb4gFTQyORlKYryFp9WHWrwZZaHlOyYDAXG9SX0hka43jTADg==, tarball: https://registry.npmmirror.com/bmaplib.texticonoverlay/-/bmaplib.texticonoverlay-1.0.2.tgz}
+    name: bmaplib.texticonoverlay
+    version: 1.0.2
+    dev: false
 
   registry.npmmirror.com/color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==, tarball: https://registry.npmmirror.com/color-convert/-/color-convert-2.0.1.tgz}
@@ -9613,10 +9700,28 @@ packages:
     version: 1.1.4
     dev: true
 
+  registry.npmmirror.com/csstype@3.1.2:
+    resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==, tarball: https://registry.npmmirror.com/csstype/-/csstype-3.1.2.tgz}
+    name: csstype
+    version: 3.1.2
+    dev: false
+
   registry.npmmirror.com/emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==, tarball: https://registry.npmmirror.com/emoji-regex/-/emoji-regex-8.0.0.tgz}
     name: emoji-regex
     version: 8.0.0
+
+  registry.npmmirror.com/entities@2.2.0:
+    resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==, tarball: https://registry.npmmirror.com/entities/-/entities-2.2.0.tgz}
+    name: entities
+    version: 2.2.0
+    dev: true
+
+  registry.npmmirror.com/entities@4.5.0:
+    resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==, tarball: https://registry.npmmirror.com/entities/-/entities-4.5.0.tgz}
+    name: entities
+    version: 4.5.0
+    engines: {node: '>=0.12'}
     dev: true
 
   registry.npmmirror.com/fsevents@2.3.3:
@@ -9638,7 +9743,37 @@ packages:
     name: is-fullwidth-code-point
     version: 3.0.0
     engines: {node: '>=8'}
-    dev: true
+
+  registry.npmmirror.com/nanoid@3.3.6:
+    resolution: {integrity: sha512-BGcqMMJuToF7i1rt+2PWSNVnWIkGCU78jBG3RxO/bZlnZPK2Cmi2QaffxGO/2RvWi9sL+FAiRiXMgsyxQ1DIDA==, tarball: https://registry.npmmirror.com/nanoid/-/nanoid-3.3.6.tgz}
+    name: nanoid
+    version: 3.3.6
+    engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
+    hasBin: true
+    dev: false
+
+  registry.npmmirror.com/picocolors@1.0.0:
+    resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==, tarball: https://registry.npmmirror.com/picocolors/-/picocolors-1.0.0.tgz}
+    name: picocolors
+    version: 1.0.0
+
+  registry.npmmirror.com/postcss@8.4.31:
+    resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==, tarball: https://registry.npmmirror.com/postcss/-/postcss-8.4.31.tgz}
+    name: postcss
+    version: 8.4.31
+    engines: {node: ^10 || ^12 || >=14}
+    dependencies:
+      nanoid: registry.npmmirror.com/nanoid@3.3.6
+      picocolors: registry.npmmirror.com/picocolors@1.0.0
+      source-map-js: registry.npmmirror.com/source-map-js@1.0.2
+    dev: false
+
+  registry.npmmirror.com/source-map-js@1.0.2:
+    resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==, tarball: https://registry.npmmirror.com/source-map-js/-/source-map-js-1.0.2.tgz}
+    name: source-map-js
+    version: 1.0.2
+    engines: {node: '>=0.10.0'}
+    dev: false
 
   registry.npmmirror.com/source-map@0.6.1:
     resolution: {integrity: sha512-UjgapumWlbMhkBgzT7Ykc5YXUT46F0iKu8SGXq0bcwP5dz/h0Plj6enJqjz1Zbq2l5WaqYnrVbwWOWMyF3F47g==, tarball: https://registry.npmmirror.com/source-map/-/source-map-0.6.1.tgz}
@@ -9653,6 +9788,12 @@ packages:
     engines: {node: '>= 8'}
     dev: false
 
+  registry.npmmirror.com/sprintf-js@1.0.3:
+    resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==, tarball: https://registry.npmmirror.com/sprintf-js/-/sprintf-js-1.0.3.tgz}
+    name: sprintf-js
+    version: 1.0.3
+    dev: false
+
   registry.npmmirror.com/string-width@4.2.3:
     resolution: {integrity: sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==, tarball: https://registry.npmmirror.com/string-width/-/string-width-4.2.3.tgz}
     name: string-width
@@ -9662,7 +9803,6 @@ packages:
       emoji-regex: registry.npmmirror.com/emoji-regex@8.0.0
       is-fullwidth-code-point: registry.npmmirror.com/is-fullwidth-code-point@3.0.0
       strip-ansi: registry.npmmirror.com/strip-ansi@6.0.1
-    dev: true
 
   registry.npmmirror.com/strip-ansi@6.0.1:
     resolution: {integrity: sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==, tarball: https://registry.npmmirror.com/strip-ansi/-/strip-ansi-6.0.1.tgz}
@@ -9671,6 +9811,65 @@ packages:
     engines: {node: '>=8'}
     dependencies:
       ansi-regex: registry.npmmirror.com/ansi-regex@5.0.1
+
+  registry.npmmirror.com/tiny-emitter@2.1.0:
+    resolution: {integrity: sha512-NB6Dk1A9xgQPMoGqC5CVXn123gWyte215ONT5Pp5a0yt4nlEoO1ZWeCwpncaekPHXO60i47ihFnZPiRPjRMq4Q==, tarball: https://registry.npmmirror.com/tiny-emitter/-/tiny-emitter-2.1.0.tgz}
+    name: tiny-emitter
+    version: 2.1.0
+    dev: false
+
+  registry.npmmirror.com/to-fast-properties@2.0.0:
+    resolution: {integrity: sha512-/OaKK0xYrs3DmxRYqL/yDc+FxFUVYhDlXMhRmv3z915w2HF1tnN1omB354j8VUGO/hbRzyD6Y3sA7v7GS/ceog==, tarball: https://registry.npmmirror.com/to-fast-properties/-/to-fast-properties-2.0.0.tgz}
+    name: to-fast-properties
+    version: 2.0.0
+    engines: {node: '>=4'}
+
+  registry.npmmirror.com/vue-baidu-map-3x@1.0.35(vue@3.3.7):
+    resolution: {integrity: sha512-1FDzxgd+X7MVcG8JbyyxDOSYRDUi96qEuuNICQmwlAE/EDwf4vz1oYRhRz05s/MuDpW7aIBlubF/PlSTpBlUEw==, tarball: https://registry.npmmirror.com/vue-baidu-map-3x/-/vue-baidu-map-3x-1.0.35.tgz}
+    id: registry.npmmirror.com/vue-baidu-map-3x/1.0.35
+    name: vue-baidu-map-3x
+    version: 1.0.35
+    peerDependencies:
+      vue: ^3.2.25
+    dependencies:
+      bmaplib.curveline: registry.npmmirror.com/bmaplib.curveline@1.0.0
+      bmaplib.distancetool: registry.npmmirror.com/bmaplib.distancetool@1.0.2
+      bmaplib.heatmap: registry.npmmirror.com/bmaplib.heatmap@1.0.4
+      bmaplib.lushu: registry.npmmirror.com/bmaplib.lushu@1.0.7
+      bmaplib.markerclusterer: registry.npmmirror.com/bmaplib.markerclusterer@1.0.13
+      tiny-emitter: registry.npmmirror.com/tiny-emitter@2.1.0
+      vue: 3.3.7(typescript@5.2.2)
+      vue-router: registry.npmmirror.com/vue-router@4.2.5(vue@3.3.7)
+    dev: false
+
+  registry.npmmirror.com/vue-icon-font@1.0.4:
+    resolution: {integrity: sha512-8z8Ra/XvbNfsVU6qQH2JbkjZSQeALFr6fIPtqtJJ9CDT7595KI6HqPTW8C2974KW6RZv+gwo7U2iDWuFTSgK5g==, tarball: https://registry.npmmirror.com/vue-icon-font/-/vue-icon-font-1.0.4.tgz}
+    name: vue-icon-font
+    version: 1.0.4
+    dependencies:
+      vue: registry.npmmirror.com/vue@2.7.15
+    dev: false
+
+  registry.npmmirror.com/vue-router@4.2.5(vue@3.3.7):
+    resolution: {integrity: sha512-DIUpKcyg4+PTQKfFPX88UWhlagBEBEfJ5A8XDXRJLUnZOvcpMF8o/dnL90vpVkGaPbjvXazV/rC1qBKrZlFugw==, tarball: https://registry.npmmirror.com/vue-router/-/vue-router-4.2.5.tgz}
+    id: registry.npmmirror.com/vue-router/4.2.5
+    name: vue-router
+    version: 4.2.5
+    peerDependencies:
+      vue: ^3.2.0
+    dependencies:
+      '@vue/devtools-api': registry.npmmirror.com/@vue/devtools-api@6.5.0
+      vue: 3.3.7(typescript@5.2.2)
+    dev: false
+
+  registry.npmmirror.com/vue@2.7.15:
+    resolution: {integrity: sha512-a29fsXd2G0KMRqIFTpRgpSbWaNBK3lpCTOLuGLEDnlHWdjB8fwl6zyYZ8xCrqkJdatwZb4mGHiEfJjnw0Q6AwQ==, tarball: https://registry.npmmirror.com/vue/-/vue-2.7.15.tgz}
+    name: vue
+    version: 2.7.15
+    dependencies:
+      '@vue/compiler-sfc': registry.npmmirror.com/@vue/compiler-sfc@2.7.15
+      csstype: registry.npmmirror.com/csstype@3.1.2
+    dev: false
 
   registry.npmmirror.com/wrap-ansi@7.0.0:
     resolution: {integrity: sha512-YVGIj2kamLSTxw6NsZjoBxfSwsn0ycdesmc4p+Q21c5zPuZ1pl+NfxVdxPtdHvmNVOQ6XSYG4AUtyt/Fi7D16Q==, tarball: https://registry.npmmirror.com/wrap-ansi/-/wrap-ansi-7.0.0.tgz}
