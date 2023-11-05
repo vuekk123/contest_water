@@ -59,6 +59,9 @@ dependencies:
   echarts:
     specifier: ^5.4.3
     version: 5.4.3
+  echarts-extension-amap:
+    specifier: ^1.11.0
+    version: registry.npmmirror.com/echarts-extension-amap@1.11.0
   el-table-infinite-scroll:
     specifier: ^3.0.3
     version: 3.0.3(typescript@5.2.2)
@@ -9704,6 +9707,12 @@ packages:
     resolution: {integrity: sha512-I7K1Uu0MBPzaFKg4nI5Q7Vs2t+3gWWW648spaF+Rg7pI9ds18Ugn+lvg4SHczUdKlHI5LWBXyqfS8+DufyBsgQ==, tarball: https://registry.npmmirror.com/csstype/-/csstype-3.1.2.tgz}
     name: csstype
     version: 3.1.2
+    dev: false
+
+  registry.npmmirror.com/echarts-extension-amap@1.11.0:
+    resolution: {integrity: sha512-H93Nx8DGbhczkz+whD+5jcrzcEzyEvkaabdeSzzaG9xy9e756sRU7lwLT4JWNdklRWqG+QuQnnxhDRdipeKy/A==, tarball: https://registry.npmmirror.com/echarts-extension-amap/-/echarts-extension-amap-1.11.0.tgz}
+    name: echarts-extension-amap
+    version: 1.11.0
     dev: false
 
   registry.npmmirror.com/emoji-regex@8.0.0:

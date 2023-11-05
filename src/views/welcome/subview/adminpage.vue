@@ -1,5 +1,13 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, ref, reactive } from "vue";
+import {
+  onMounted,
+  onUnmounted,
+  ref,
+  reactive,
+  onBeforeMount,
+  nextTick
+} from "vue";
+import baidumap from "./baidumap.vue";
 import AMapLoader from "@amap/amap-jsapi-loader";
 import {
   device,
@@ -11,94 +19,7 @@ import {
 } from "../../login/utils/static";
 import { Histogram, List, Clock } from "@element-plus/icons-vue";
 import { ReNormalCountTo, ReboundCountTo } from "@/components/ReCountTo";
-const mouseflag = ref(false);
-const outbox = ref<HTMLElement>(null);
-const infoWindow = {};
-console.log(outbox);
-let map = null;
-const markerList = [];
-const mapmark = [
-  { x: 120.09, y: 30.32, title: "北京" },
-  { x: 120.21, y: 30.2, title: "杭州" },
-  { x: 120.22, y: 30.3, title: "杭州" },
-  { x: 120.24, y: 30.24, title: "杭州" },
-  { x: 120.1, y: 30.23, title: "杭州" }
-];
-const movement = reactive({
-  w: window.pageXOffset,
-  h: window.pageYOffset,
-  wt: 0
-});
-const markerpos = reactive({ w: 0, h: 0 });
-const gerpos = (e: MouseEvent) => {
-  movement.w = e.pageX - 240;
-  movement.h = e.pageY;
-  movement.wt = e.pageX;
-};
-onMounted(() => {
-  AMapLoader.load({
-    key: "8e7af8d9709450d729538d40f601ef8f",
-    version: "2.0",
-    plugins: ["AMap.AdvancedInfoWindow"]
-  })
-    .then(AMap => {
-      var infoWindow = new AMap.InfoWindow({
-        anchor: "top-left",
-        content: "这是信息窗体！"
-      });
-      map = new AMap.Map("container", {
-        viewMode: "3D",
-        zoom: 12,
-        center: [120.16, 30.26],
-        mapStyle: "amap://styles/whitesmoke"
-      });
-      mapmark.forEach(item => {
-        const marker = new AMap.Marker({
-          position: new AMap.LngLat(item.x, item.y)
-          // title: item.title
-        });
-        marker.on("mouseover", function (e) {
-          infoWindow.close();
-          infoWindow.open(map, [item.x, item.y]);
-          mouseflag.value = true;
-          markerpos.w = e.pixel.x;
-          markerpos.h = e.pixel.y;
-        });
-        map.on("mousemove", function (e) {
-          var amap = document.querySelector(".amap-info") as HTMLElement;
-          if (amap) {
-            amap.style.translate =
-              e.pixel.x -
-              markerpos.w +
-              "px" +
-              " " +
-              (e.pixel.y - markerpos.h) +
-              "px";
-          }
-          if (
-            Math.abs(movement.w - markerpos.w) +
-              Math.abs(movement.h - markerpos.h) >
-            150
-          ) {
-            infoWindow.close();
-            mouseflag.value = false;
-            movement.w = 0;
-            movement.h = 0;
-            markerpos.w = 0;
-            markerpos.h = 0;
-          }
-        });
-        markerList.push(marker);
-      });
-      map.add(markerList);
-    })
-    .catch(e => {
-      console.log(e);
-    });
-});
-onUnmounted(() => {
-  map?.destroy();
-});
+const message = ref(1);
 </script>
 
 <template>
@@ -106,11 +27,7 @@ onUnmounted(() => {
     <el-row :gutter="20">
       <el-col :xs="24" :sm="24" :md="24" :lg="14" :xl="14" style="">
         <div style="overflow: hidden; border: 1px solid #ccc">
-          <div
-            id="container"
-            @mousemove="mouseflag ? gerpos($event) : ''"
-            ref="outbox"
-          ></div>
+          <baidumap :flag="message" />
         </div>
       </el-col>
       <el-col :xs="24" :sm="24" :md="24" :lg="10" :xl="10">

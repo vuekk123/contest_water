@@ -64,6 +64,7 @@
     "cropperjs": "^1.6.1",
     "dayjs": "^1.11.10",
     "echarts": "^5.4.3",
+    "echarts-extension-amap": "^1.11.0",
     "el-table-infinite-scroll": "^3.0.3",
     "element-plus": "^2.4.1",
     "intro.js": "^7.2.0",

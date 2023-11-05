@@ -1,7 +1,3 @@
-<template>
-  <div>common</div>
-</template>
-
-<script setup lang="ts"></script>
-
+<script></script>
+<template></template>
 <style></style>
