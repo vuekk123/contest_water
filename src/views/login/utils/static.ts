@@ -12,4 +12,5 @@ import alert from "@/assets/icons/svg/alert.svg?component";
 import loga from "@/assets/icons/svg/log-a.svg?component";
 import eventa from "@/assets/icons/svg/event-a.svg?component";
 
+
 export { bg, avatar, illustration,exam,book,bgpic ,waterbox,device,monitor,model,alert,loga,eventa};

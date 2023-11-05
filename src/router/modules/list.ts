@@ -2,6 +2,7 @@ import { $t } from "@/plugins/i18n";
 import { list } from "@/router/enums";
 import { Platform } from "@element-plus/icons-vue"
 // import device from "@iconify-icons/ep/platform";
+import {WarningFilled} from "@element-plus/icons-vue"
 import device from "@/assets/icons/svg/device.svg"
 
 export default {
@@ -20,6 +21,16 @@ export default {
       meta: {
         icon:device,
         title: $t("menus.hsdevice"),
+        showParent: true
+      }
+    },
+    {
+      path: "/list/warn",
+      name: "devicewarn",
+      component: () => import("@/views/list/warn/index.vue"),
+      meta: {
+        icon:WarningFilled,
+        title: $t("menus.hswarn"),
         showParent: true
       }
     }

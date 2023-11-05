@@ -5,7 +5,8 @@ import { useNav } from "@/layout/hooks/useNav";
 const props = defineProps({
   collapse: Boolean
 });
-
+import water from "@/assets/login/water.svg?component";
+// import water from "@/assets/login/water.svg?component";
 const { title } = useNav();
 </script>
 
@@ -19,7 +20,8 @@ const { title } = useNav();
         class="sidebar-logo-link"
         :to="getTopMenu()?.path ?? '/'"
       >
-        <img src="../../../assets/login/book.svg" alt="logo" />
+        <!-- <img src="../../../assets/login/book.svg" alt="logo" /> -->
+        <water />
         <span class="sidebar-title">{{ title }}</span>
       </router-link>
       <router-link
@@ -29,7 +31,8 @@ const { title } = useNav();
         class="sidebar-logo-link"
         :to="getTopMenu()?.path ?? '/'"
       >
-        <img src="../../../assets/login/book.svg" alt="logo" />
+        <!-- <img src="../../../assets/login/book.svg" alt="logo" /> -->
+        <water />
         <span class="sidebar-title">{{ title }}</span>
       </router-link>
     </transition>

@@ -8,7 +8,9 @@ import dialogForm from "./components/DialogForm.vue";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import Search from "@iconify-icons/ep/search";
 import AddFill from "@iconify-icons/ri/add-circle-line";
-
+// import { list } from "../static";
+// import { isDark } from '~/composables/dark'
+import { Menu, Grid } from "@element-plus/icons-vue";
 defineOptions({
   name: "ListCard"
 });
@@ -90,6 +92,21 @@ const handleManageProduct = product => {
     formData.value = { ...product, status: product?.isSetup ? "1" : "0" };
   });
 };
+const turnName = ref("列表");
+const turnIcon = ref(Grid);
+const turnIconFir = ref(Grid);
+const turnIconthen = ref(Menu);
+const turnflag = ref(false);
+const turnmodel = () => {
+  turnflag.value = !turnflag.value;
+  if (turnflag.value) {
+    turnName.value = "卡片";
+    turnIcon.value = turnIconthen.value;
+  } else {
+    turnName.value = "列表";
+    turnIcon.value = turnIconFir.value;
+  }
+};
 </script>
 
 <template>
@@ -101,6 +118,15 @@ const handleManageProduct = product => {
       >
         新建产品
       </el-button>
+      <!-- <el-button class="turnlist">Plain</el-button> -->
+      <el-button
+        type="primary"
+        :icon="turnIcon"
+        @click="turnmodel"
+        id="turnbtn"
+        >{{ "切换" + turnName }}</el-button
+      >
+      <!-- <Menu style="width: 1em; height: 1em; margin-right: 8px; color: white" /> -->
       <el-input
         style="width: 300px"
         v-model="searchValue"
@@ -176,3 +202,40 @@ const handleManageProduct = product => {
     <dialogForm v-model:visible="formDialogVisible" :data="formData" />
   </div>
 </template>
+<style scoped>
+/* .el-button:focus {
+  background: #ebf5ff;
+  color: #409eff;
+  border-color: #9fceff;
+  outline-color: #9fceff;
+}
+.el-button:active {
+  background: #409eff;
+} */
+.el-button--primary {
+  --el-button-bg-color: #409eff;
+  --el-button-hover-bg-color: #409eff;
+}
+.el-button--primary:hover {
+  --el-button-hover-bg-color: #79bbff;
+}
+
+.el-button--warning.is-plain {
+  --el-button-bg-color: #fdf6ec;
+  --el-button-hover-text-color: #e6a23c;
+  --el-button-hover-bg-color: #fdf6ec;
+}
+.el-button--warning.is-plain:hover {
+  --el-button-hover-text-color: #fff;
+  --el-button-hover-bg-color: #e6a23c;
+}
+.el-button--danger.is-plain {
+  --el-button-bg-color: #fef0f0;
+  --el-button-hover-text-color: #f56c6c;
+  --el-button-hover-bg-color: #fef0f0;
+}
+.el-button--danger.is-plain:hover {
+  --el-button-hover-text-color: #fff;
+  --el-button-hover-bg-color: #f56c6c;
+}
+</style>

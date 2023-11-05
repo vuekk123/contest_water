@@ -8,6 +8,7 @@ import {
   nextTick
 } from "vue";
 import baidumap from "./baidumap.vue";
+import commonpage from "./commonpage.vue";
 import AMapLoader from "@amap/amap-jsapi-loader";
 import {
   device,
@@ -44,7 +45,6 @@ const message = ref(1);
                 </div>
                 <div class="card-panel-description">
                   <div class="card-panel-text">设备数量</div>
-                  <!-- <div class="card-panel-num"> -->
                   <ReNormalCountTo
                     :duration="2000"
                     :color="'#666666'"
@@ -52,7 +52,6 @@ const message = ref(1);
                     :startVal="1"
                     :endVal="26"
                   />
-                  <!-- </div> -->
                 </div>
               </div>
             </el-col>
@@ -196,20 +195,21 @@ const message = ref(1);
       </el-col>
     </el-row>
     <el-row>
-      <div style="width: 100%; background-color: black; height: 200px">
-        then
-      </div>
+      <el-card class="footer" style="padding-bottom: 0 !important"
+        ><commonpage
+      /></el-card>
     </el-row>
   </div>
 </template>
 
 <style scoped lang="scss">
+:deep(.el-card__body) {
+  padding-bottom: 0 !important;
+}
 :deep(.scroll-num) {
-  // animation: enhance-bounce-in-down 0.1s calc(var(--delay) * 1s) forwards !important;
   ul li {
     font-size: 18px !important;
     color: #666666 !important;
-    // font-weight: normal !important;
   }
 }
 #container {
@@ -261,7 +261,6 @@ const message = ref(1);
     color: #666;
     border: 1px solid #eee;
     border-radius: 5px;
-    //box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.08);
     background-color: #fff;
 
     &:hover {
@@ -365,5 +364,9 @@ const message = ref(1);
 }
 .marginicon {
   margin-right: 5px;
+}
+.footer {
+  width: 100%;
+  background: white;
 }
 </style>
