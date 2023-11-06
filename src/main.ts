@@ -15,6 +15,7 @@ import VueIconFont from 'vue-icon-font'
 import '@/assets/iconfont/iconfont.css'
 import '@/assets/iconfont/iconfont.js'
 import 'echarts-extension-amap'
+import animated from 'animate.css'
 
 // 引入重置样式
 import "./style/reset.scss";
