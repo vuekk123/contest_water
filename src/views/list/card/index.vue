@@ -11,10 +11,15 @@ import AddFill from "@iconify-icons/ri/add-circle-line";
 // import { list } from "../static";
 // import { isDark } from '~/composables/dark'
 import { Menu, Grid } from "@element-plus/icons-vue";
+import list from "./components/list.vue";
+import { animates } from "@/components/ReAnimateSelector/src/animate";
+import { tableDataMore } from "./components/data";
+import { array } from "vue-types";
+import { cloneDeep } from "@pureadmin/utils";
 defineOptions({
   name: "ListCard"
 });
-
+const tableListDate = cloneDeep(tableDataMore);
 const svg = `
         <path class="path" d="
           M 30 15
@@ -63,6 +68,7 @@ onMounted(() => {
 const formDialogVisible = ref(false);
 const formData = ref({ ...INITIAL_DATA });
 const searchValue = ref("");
+const searchValueThen = ref("");
 
 const onPageSizeChange = (size: number) => {
   pagination.value.pageSize = size;
@@ -107,6 +113,16 @@ const turnmodel = () => {
     turnIcon.value = turnIconFir.value;
   }
 };
+onMounted(() => {
+  const footerdom = document.querySelector(".layout-footer") as HTMLElement;
+  // const background = document.querySelector("#background") as HTMLElement;
+  // const cardlist = document.querySelector("#cardlist") as HTMLElement;
+  // background.style.height = cardlist.clientHeight + "px";
+  // footerdom.style.display = "none";
+  // const clientHeight = cardlist.clientHeight;
+  // footerdom.style.position = "relative";
+  // footerdom.style.top = clientHeight + 10 + "px";
+});
 </script>
 
 <template>
@@ -128,9 +144,26 @@ const turnmodel = () => {
       >
       <!-- <Menu style="width: 1em; height: 1em; margin-right: 8px; color: white" /> -->
       <el-input
+        v-show="turnflag == false"
         style="width: 300px"
         v-model="searchValue"
-        placeholder="请输入产品名称"
+        placeholder="请输入设备名称"
+        clearable
+      >
+        <template #suffix>
+          <el-icon class="el-input__icon">
+            <IconifyIconOffline
+              v-show="searchValue.length === 0"
+              :icon="Search"
+            />
+          </el-icon>
+        </template>
+      </el-input>
+      <el-input
+        v-show="turnflag == true"
+        style="width: 300px"
+        v-model="searchValueThen"
+        placeholder="请输入设备名称"
         clearable
       >
         <template #suffix>
@@ -143,75 +176,87 @@ const turnmodel = () => {
         </template>
       </el-input>
     </div>
-    <div
-      v-loading="dataLoading"
-      :element-loading-svg="svg"
-      element-loading-svg-view-box="-10, -10, 50, 50"
-    >
-      <el-empty
-        description="暂无数据"
-        v-show="
-          productList
-            .slice(
-              pagination.pageSize * (pagination.current - 1),
-              pagination.pageSize * pagination.current
-            )
-            .filter(v =>
-              v.name.toLowerCase().includes(searchValue.toLowerCase())
-            ).length === 0
-        "
-      />
-      <template v-if="pagination.total > 0">
-        <el-row :gutter="16">
-          <el-col
-            v-for="(product, index) in productList
-              .slice(
-                pagination.pageSize * (pagination.current - 1),
-                pagination.pageSize * pagination.current
-              )
-              .filter(v =>
-                v.name.toLowerCase().includes(searchValue.toLowerCase())
-              )"
-            :key="index"
-            :xs="24"
-            :sm="12"
-            :md="8"
-            :lg="6"
-            :xl="4"
-          >
-            <Card
-              :product="product"
-              @delete-item="handleDeleteItem"
-              @manage-product="handleManageProduct"
+    <div style="display: flex; flex-shrink: 0">
+      <transition enter-active-class="animate__animated animate__fadeInLeft">
+        <div
+          id="cardlist"
+          style="display: inline-block"
+          v-if="turnflag == false"
+          v-loading="dataLoading"
+          :element-loading-svg="svg"
+          element-loading-svg-view-box="-10, -10, 50, 50"
+        >
+          <el-empty
+            description="暂无数据"
+            v-show="
+              productList
+                .slice(
+                  pagination.pageSize * (pagination.current - 1),
+                  pagination.pageSize * pagination.current
+                )
+                .filter(v =>
+                  v.name.toLowerCase().includes(searchValue.toLowerCase())
+                ).length === 0
+            "
+          />
+          <template v-if="pagination.total > 0">
+            <el-row :gutter="16">
+              <el-col
+                v-for="(product, index) in productList
+                  .slice(
+                    pagination.pageSize * (pagination.current - 1),
+                    pagination.pageSize * pagination.current
+                  )
+                  .filter(v =>
+                    v.name.toLowerCase().includes(searchValue.toLowerCase())
+                  )"
+                :key="index"
+                :xs="24"
+                :sm="12"
+                :md="8"
+                :lg="6"
+                :xl="4"
+              >
+                <Card
+                  :product="product"
+                  @delete-item="handleDeleteItem"
+                  @manage-product="handleManageProduct"
+                />
+              </el-col>
+            </el-row>
+            <el-pagination
+              class="float-right"
+              v-model:currentPage="pagination.current"
+              :page-size="pagination.pageSize"
+              :total="pagination.total"
+              :page-sizes="[12, 24, 36]"
+              :background="true"
+              layout="total, sizes, prev, pager, next, jumper"
+              @size-change="onPageSizeChange"
+              @current-change="onCurrentChange"
             />
-          </el-col>
-        </el-row>
-        <el-pagination
-          class="float-right"
-          v-model:currentPage="pagination.current"
-          :page-size="pagination.pageSize"
-          :total="pagination.total"
-          :page-sizes="[12, 24, 36]"
-          :background="true"
-          layout="total, sizes, prev, pager, next, jumper"
-          @size-change="onPageSizeChange"
-          @current-change="onCurrentChange"
+          </template>
+        </div>
+      </transition>
+      <transition enter-active-class="animate__animated animate__fadeInRight">
+        <list
+          :tableDataMore="
+            searchValueThen == ''
+              ? tableListDate
+              : tableListDate.filter(item =>
+                  item.name.includes(searchValueThen)
+                )
+          "
+          v-if="turnflag == true"
+          style="display: inline-block; position: relative; width: 100%"
         />
-      </template>
+      </transition>
     </div>
+
     <dialogForm v-model:visible="formDialogVisible" :data="formData" />
   </div>
 </template>
 <style scoped>
-/* .el-button:focus {
-  background: #ebf5ff;
-  color: #409eff;
-  border-color: #9fceff;
-  outline-color: #9fceff;
-}
-.el-button:active {
-  background: #409eff;
-} */
 .el-button--primary {
   --el-button-bg-color: #409eff;
   --el-button-hover-bg-color: #409eff;
@@ -238,4 +283,28 @@ const turnmodel = () => {
   --el-button-hover-text-color: #fff;
   --el-button-hover-bg-color: #f56c6c;
 }
+.animate__animated.animate__fadeInLeft {
+  --animate-duration: 0.5s;
+}
+.animate__animated.animate__fadeOutRight {
+  --animate-duration: 0.5s;
+}
+.animate__animated.animate__fadeInRight {
+  --animate-duration: 0.5s;
+}
+.animate__animated.animate__fadeOutLeft {
+  --animate-duration: 0.5s;
+}
+</style>
+<style>
+.el-scrollbar__view {
+  overflow-x: hidden;
+}
+.main.main-content {
+  overflow-x: hidden;
+}
+/* .layout-footer {
+  position: absolute;
+  bottom: 0;
+} */
 </style>

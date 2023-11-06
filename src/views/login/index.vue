@@ -33,7 +33,8 @@ import {
   exam,
   book,
   bgpic,
-  waterbox
+  waterbox,
+  waterstar
 } from "./utils/static";
 import { ReImageVerify } from "@/components/ReImageVerify";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";

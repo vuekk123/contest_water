@@ -194,7 +194,7 @@ const message = ref(1);
         </el-card>
       </el-col>
     </el-row>
-    <el-row>
+    <el-row style="margin-bottom: 20px">
       <el-card class="footer" style="padding-bottom: 0 !important"
         ><commonpage
       /></el-card>
