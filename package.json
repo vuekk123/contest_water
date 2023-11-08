@@ -1,9 +1,9 @@
 {
-  "name": "vue-pure-admin",
+  "name": "水务物联网数据采集平台",
   "version": "4.5.0",
   "private": true,
   "keywords": [
-    "vue-pure-admin",
+    "水务物联网数据采集平台",
     "element-plus",
     "tailwindcss",
     "pure-admin",

@@ -23,7 +23,7 @@ export default [
               isSetup: false,
               type: 1,
               name: "人脸识别",
-              number:"D1PGLPG58K88",
+              number:"D1PGLPG58K81",
               product: "★摄像头产品",
               activate:"2023-08-29"
             },
@@ -32,7 +32,7 @@ export default [
               isSetup: false,
               type: 5,
               name: "水压感应器",
-              number:"D1PGLPG58K88",
+              number:"D1PGLPG58K82",
               product: "★摄像头产品",
               activate:"2023-08-29"
             },
@@ -41,7 +41,7 @@ export default [
               isSetup: false,
               type: 2,
               name: "水压开关",
-              number:"D1PGLPG58K88",
+              number:"D1PGLPG58K83",
               product: "★摄像头产品",
               activate:"2023-08-29"
             },
@@ -50,7 +50,7 @@ export default [
               isSetup: true,
               type: 3,
               name: "摄像头",
-              number:"D1PGLPG58K88",
+              number:"D1PGLPG58K84",
               product: "★摄像头产品",
               activate:"2023-08-29"
             },

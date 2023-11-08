@@ -89,10 +89,7 @@ export default defineComponent({
         const percents =
           Math.floor(((currentPage - offset) / targetOffset) * 10000) / 100;
 
-        if (
-          percents > props.splitSet?.minPercent &&
-          percents < 100 - props.splitSet?.minPercent
-        ) {
+        if (percents > 14 && percents < 20) {
           percent.value = percents;
         }
 
@@ -112,9 +109,13 @@ export default defineComponent({
         >
           <div
             class={unref(leftClass)}
-            style={{ [unref(type)]: unref(percent) + "%" }}
+            style={{
+              [unref(type)]: unref(percent) + "%",
+              overflow: "hidden",
+              padding: "0 5px"
+            }}
           >
-            {ctx.slots.paneL()}
+            <div>{ctx.slots.paneL()}</div>
           </div>
           <resizer
             style={`${unref([resizeType])}:${unref(percent)}%`}
@@ -124,7 +125,11 @@ export default defineComponent({
           ></resizer>
           <div
             class={unref(rightClass)}
-            style={{ [unref(type)]: 100 - unref(percent) + "%" }}
+            style={{
+              [unref(type)]: 100 - unref(percent) + "%",
+              overflow: "hidden",
+              background: "#f0f2f5"
+            }}
           >
             {ctx.slots.paneR()}
           </div>

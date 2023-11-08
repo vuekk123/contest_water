@@ -207,9 +207,15 @@ function moutedformb() {
 }
 </script>
 <template>
-  <div style="display: flex; justify-content: space-around">
-    <div id="forma" style="width: 400px; height: 300px"></div>
-    <div id="formb" style="width: 600px; height: 300px"></div>
+  <div>
+    <div
+      id="forma"
+      style="width: 400px; height: 300px; display: inline-block"
+    ></div>
+    <div
+      id="formb"
+      style="width: 600px; height: 300px; display: inline-block"
+    ></div>
   </div>
 </template>
 <style></style>

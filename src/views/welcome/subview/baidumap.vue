@@ -5,6 +5,8 @@ import * as echarts from "echarts";
 // https://api.map.baidu.com/api?v=3.0&ak=你申请的AK
 import "echarts/extension/bmap/bmap";
 import { onBeforeMount, ref } from "vue";
+import { useDetail } from "@/router/hooks";
+const { toDetail, router } = useDetail();
 //接受父组件传过来的参数
 const props = defineProps({
   flag: {
@@ -80,17 +82,9 @@ function getmap() {
   var option;
 
   // 单击事件
-  // myChart.on("click", params => {
-  //   if (params.data.deviceId) {
-  //     this.$router.push({
-  //       path: "/iot/device-edit",
-  //       query: {
-  //         t: Date.now(),
-  //         deviceId: params.data.deviceId
-  //       }
-  //     });
-  //   }
-  // });
+  myChart.on("click", params => {
+    toDetail({ deviceId: params.data.serialNumber }, "query");
+  });
 
   // 格式化数据
   var option;

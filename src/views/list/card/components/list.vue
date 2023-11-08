@@ -11,6 +11,9 @@ const props = defineProps({
   tableDataMore: {
     type: Array,
     default: ""
+  },
+  turnflag: {
+    type: Boolean
   }
 });
 
@@ -87,29 +90,36 @@ onMounted(() => {
   const outcontain = document.querySelector(
     ".el-scrollbar__wrap"
   ) as HTMLElement;
-  maxheight.value = outcontain.clientHeight - 120 + "px";
+  maxheight.value = outcontain.clientHeight - 150 + "px";
   console.log(maxheight.value);
 });
 </script>
 
 <template>
-  <div id="outcontain" :style="{ height: maxheight }" style="overflow: hidden">
-    <!-- <el-button class="mt-4" style="width: 100%" @click="onAddItem">
-      Add Item
-    </el-button> -->
-    <pure-table :data="tableData" :columns="columns" :maxHeight="maxheight">
-      <template #operation="{ $index }">
-        <el-button
-          link
-          type="primary"
-          size="small"
-          @click.prevent="deleteRow($index)"
-        >
-          Remove
-        </el-button>
-      </template>
-    </pure-table>
-  </div>
+  <transition enter-active-class="animate__animated animate__fadeInRight">
+    <div
+      v-show="turnflag == true"
+      id="outcontain"
+      :style="{ height: maxheight }"
+      style="overflow: hidden"
+    >
+      <!-- <el-button class="mt-4" style="width: 100%" @click="onAddItem">
+        Add Item
+      </el-button> -->
+      <pure-table :data="tableData" :columns="columns" :maxHeight="maxheight">
+        <template #operation="{ $index }">
+          <el-button
+            link
+            type="primary"
+            size="small"
+            @click.prevent="deleteRow($index)"
+          >
+            Remove
+          </el-button>
+        </template>
+      </pure-table>
+    </div>
+  </transition>
 </template>
 <style>
 .grow {

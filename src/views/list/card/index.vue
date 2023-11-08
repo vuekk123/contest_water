@@ -16,6 +16,8 @@ import { animates } from "@/components/ReAnimateSelector/src/animate";
 import { tableDataMore } from "./components/data";
 import { array } from "vue-types";
 import { cloneDeep } from "@pureadmin/utils";
+import { useDetail } from "@/router/hooks";
+const { toDetail, router } = useDetail();
 defineOptions({
   name: "ListCard"
 });
@@ -77,20 +79,22 @@ const onPageSizeChange = (size: number) => {
 const onCurrentChange = (current: number) => {
   pagination.value.current = current;
 };
-const handleDeleteItem = product => {
-  ElMessageBox.confirm(
-    product
-      ? `确认删除后${product.name}的所有产品信息将被清空, 且无法恢复`
-      : "",
-    "提示",
-    {
-      type: "warning"
-    }
-  )
-    .then(() => {
-      message("删除成功", { type: "success" });
-    })
-    .catch(() => {});
+const deviceDetails = product => {
+  console.log(product);
+  toDetail({ deviceId: product.number }, "query");
+  // ElMessageBox.confirm(
+  //   product
+  //     ? `确认删除后${product.name}的所有产品信息将被清空, 且无法恢复`
+  //     : "",
+  //   "提示",
+  //   {
+  //     type: "warning"
+  //   }
+  // )
+  //   .then(() => {
+  //     message("删除成功", { type: "success" });
+  //   })
+  //   .catch(() => {});
 };
 const handleManageProduct = product => {
   formDialogVisible.value = true;
@@ -144,7 +148,7 @@ onMounted(() => {
       >
       <!-- <Menu style="width: 1em; height: 1em; margin-right: 8px; color: white" /> -->
       <el-input
-        v-show="turnflag == false"
+        v-if="turnflag == false"
         style="width: 300px"
         v-model="searchValue"
         placeholder="请输入设备名称"
@@ -176,11 +180,11 @@ onMounted(() => {
         </template>
       </el-input>
     </div>
-    <div style="display: flex; flex-shrink: 0">
+    <div style="flex-shrink: 0">
       <transition enter-active-class="animate__animated animate__fadeInLeft">
         <div
           id="cardlist"
-          style="display: inline-block"
+          style="display: inline-block; width: 100%"
           v-if="turnflag == false"
           v-loading="dataLoading"
           :element-loading-svg="svg"
@@ -200,30 +204,33 @@ onMounted(() => {
             "
           />
           <template v-if="pagination.total > 0">
-            <el-row :gutter="16">
-              <el-col
-                v-for="(product, index) in productList
-                  .slice(
-                    pagination.pageSize * (pagination.current - 1),
-                    pagination.pageSize * pagination.current
-                  )
-                  .filter(v =>
-                    v.name.toLowerCase().includes(searchValue.toLowerCase())
-                  )"
-                :key="index"
-                :xs="24"
-                :sm="12"
-                :md="8"
-                :lg="6"
-                :xl="4"
-              >
-                <Card
-                  :product="product"
-                  @delete-item="handleDeleteItem"
-                  @manage-product="handleManageProduct"
-                />
-              </el-col>
-            </el-row>
+            <div style="width: 100%">
+              <el-row :gutter="16">
+                <el-col
+                  v-for="(product, index) in productList
+                    .slice(
+                      pagination.pageSize * (pagination.current - 1),
+                      pagination.pageSize * pagination.current
+                    )
+                    .filter(v =>
+                      v.name.toLowerCase().includes(searchValue.toLowerCase())
+                    )"
+                  :key="index"
+                  :xs="24"
+                  :sm="12"
+                  :md="8"
+                  :lg="6"
+                  :xl="4"
+                >
+                  <Card
+                    :product="product"
+                    @findDevice="deviceDetails"
+                    @manage-product="handleManageProduct"
+                  />
+                </el-col>
+              </el-row>
+            </div>
+
             <el-pagination
               class="float-right"
               v-model:currentPage="pagination.current"
@@ -238,19 +245,21 @@ onMounted(() => {
           </template>
         </div>
       </transition>
-      <transition enter-active-class="animate__animated animate__fadeInRight">
-        <list
-          :tableDataMore="
-            searchValueThen == ''
-              ? tableListDate
-              : tableListDate.filter(item =>
-                  item.name.includes(searchValueThen)
-                )
-          "
-          v-if="turnflag == true"
-          style="display: inline-block; position: relative; width: 100%"
-        />
-      </transition>
+
+      <list
+        :tableDataMore="
+          searchValueThen == ''
+            ? tableListDate
+            : tableListDate.filter(item => item.name.includes(searchValueThen))
+        "
+        :turnflag="turnflag"
+        style="
+          display: inline-block;
+          position: relative;
+          width: 100%;
+          display: none;
+        "
+      />
     </div>
 
     <dialogForm v-model:visible="formDialogVisible" :data="formData" />
@@ -284,25 +293,25 @@ onMounted(() => {
   --el-button-hover-bg-color: #f56c6c;
 }
 .animate__animated.animate__fadeInLeft {
-  --animate-duration: 0.5s;
+  --animate-duration: 0.75s;
 }
 .animate__animated.animate__fadeOutRight {
-  --animate-duration: 0.5s;
+  --animate-duration: 0.75s;
 }
 .animate__animated.animate__fadeInRight {
-  --animate-duration: 0.5s;
+  --animate-duration: 0.75s;
 }
 .animate__animated.animate__fadeOutLeft {
-  --animate-duration: 0.5s;
+  --animate-duration: 0.75s;
 }
-</style>
-<style>
 .el-scrollbar__view {
   overflow-x: hidden;
 }
 .main.main-content {
   overflow-x: hidden;
 }
+</style>
+<style>
 /* .layout-footer {
   position: absolute;
   bottom: 0;
