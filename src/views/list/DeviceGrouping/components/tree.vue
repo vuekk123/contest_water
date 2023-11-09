@@ -134,7 +134,6 @@ function toggleRowExpansionAll(status) {
 }
 const nodeClick = value => {
   const nodeId = value.$treeNodeId;
-  console.log(nodeId);
   highlightMap.value[nodeId] = highlightMap.value[nodeId]?.highlight
     ? Object.assign({ id: nodeId }, highlightMap.value[nodeId], {
         highlight: false
@@ -310,7 +309,11 @@ const closedrag = () => {
         </span>
       </template></el-tree
     >
-    <addgroup :dialogVisible="dialogVisible" @close="closedrag" :treeinfo="data"/>
+    <addgroup
+      :dialogVisible="dialogVisible"
+      @close="closedrag"
+      :treeinfo="data"
+    />
   </div>
 </template>
 <style scoped lang="scss">

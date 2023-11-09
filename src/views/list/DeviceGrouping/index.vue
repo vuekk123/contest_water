@@ -58,10 +58,9 @@ const recursion = value => {
 };
 
 const onTreeSelectFIr = value => {
-  // console.log(value);
   selectinfo.value = [];
   recursion(value);
-  onTreeSelect(selectinfo.value);
+  onTreeSelect(selectinfo.value,value);
 };
 const formInline = reactive({
   deviceName: "",
@@ -149,7 +148,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
               >
                 <template #buttons>
                   <el-button type="primary" :icon="useRenderIcon(AddFill)">
-                    新增用户
+                    新增设备
                   </el-button>
                 </template>
                 <template v-slot="{ size, dynamicColumns }">

@@ -44,7 +44,7 @@ export function useUser(tableRef: Ref) {
   const form = reactive({
     // 左侧部门树的id
     deptId: "",
-    default: "123"
+    default: "全部"
   });
   // 列标题
   const columns: TableColumnList = [
@@ -157,8 +157,11 @@ export function useUser(tableRef: Ref) {
     }, 500);
   }
   //导航树信息
-  function onTreeSelect(value) {
+  function onTreeSelect(value, val) {
     treeinfolist.value = value;
+    form.deptId = val.label;
+    console.log(val);
+    console.log(form.deptId);
     // console.log(value);
     // treeinfolist.value.push(value.id);
     // console.log(treeinfolist.value);

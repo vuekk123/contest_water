@@ -13,7 +13,7 @@ const columns: TableColumnList = [
     label: "日期",
     prop: "date",
     width: "260",
-    fixed: true 
+    fixed: true
   },
   {
     label: "姓名",
@@ -77,9 +77,6 @@ onMounted(() => {
 
 <template>
   <div id="outcontain" :style="{ height: maxheight }" style="overflow: hidden">
-    <el-button class="mt-4" style="width: 100%" @click="onAddItem">
-      Add Item
-    </el-button>
     <pure-table :data="listdate" :columns="columns" :maxHeight="maxheight">
       <template #operation="{ $index }">
         <el-button
