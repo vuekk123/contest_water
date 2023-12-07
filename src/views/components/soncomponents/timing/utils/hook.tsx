@@ -119,9 +119,9 @@ export function useUser(tableRef: Ref, treeRef: Ref) {
     return newTreeList;
   }
 
-  function openDialog(title = "新增", row?: FormItemProps) {
+  function openDialog(title = "添加", row?: FormItemProps) {
     addDialog({
-      title: `${title}用户`,
+      title: `${title}定时`,
       props: {
         formInline: {
           title,

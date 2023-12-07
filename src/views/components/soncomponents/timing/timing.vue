@@ -83,7 +83,7 @@ const {
           :icon="useRenderIcon(AddFill)"
           @click="openDialog()"
         >
-          新增用户
+          添加定时
         </el-button>
       </template>
       <template v-slot="{ size, dynamicColumns }">
