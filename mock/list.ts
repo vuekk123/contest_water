@@ -12,110 +12,110 @@ export default [
             {
               index: 1,
               isSetup: true,
-              type: 1,
-              name: "摄像头",
-              number:"D1PGLPG58K88",
-              product: "★摄像头产品",
-              activate:"2023-08-29"
+              type: 2,
+              name: "智能流量计 - SMF100",
+              number: "D1PGLPG58K88",
+              product: "★智能流量计",
+              activate: "2023-08-29"
             },
             {
               index: 2,
               isSetup: false,
-              type: 1,
-              name: "人脸识别",
-              number:"D1PGLPG58K81",
-              product: "★摄像头产品",
-              activate:"2023-08-29"
+              type: 2,
+              name: "水质检测仪 - WQD200",
+              number: "X9K5L2Z7Y1A3B",
+              product: "★人脸识别设备",
+              activate: "2021-03-28"
             },
             {
               index: 3,
               isSetup: false,
               type: 5,
-              name: "水压感应器",
-              number:"D1PGLPG58K82",
-              product: "★摄像头产品",
-              activate:"2023-08-29"
+              name: "压力传感器 - PPS300",
+              number: "D7H2N5G4R1K3O",
+              product: "★水压感应器设备",
+              activate: "2020-08-12"
             },
             {
               index: 1,
               isSetup: false,
               type: 2,
-              name: "水压开关",
-              number:"D1PGLPG58K83",
-              product: "★摄像头产品",
-              activate:"2023-08-29"
+              name: "液位计 - LLJ400",
+              number: "D7H2N5G4R1K3O",
+              product: "★液位计",
+              activate: "2022-05-06"
             },
             {
               index: 5,
               isSetup: true,
-              type: 3,
-              name: "摄像头",
-              number:"D1PGLPG58K84",
-              product: "★摄像头产品",
-              activate:"2023-08-29"
+              type: 2,
+              name: "温度传感器 - TMS500",
+              number: "V5C9X2Z8N1T3G",
+              product: "★温度传感器",
+              activate: "2021-09-20"
             },
             {
               index: 6,
               isSetup: true,
-              type: 3,
-              name: "T-Sec 云防火墙",
-              number:"D1PGLPG58K88",
-              product: "★摄像头产品",
-              activate:"2023-08-29"
+              type: 2,
+              name: "智能水泵控制器 - SKC600",
+              number: "B6P5K9H2G1Y3A",
+              product: "★智能水泵控制器",
+              activate: "2020-11-04"
             },
             {
               index: 7,
               isSetup: false,
-              type: 1,
-              name: "摄像头",
-              number:"D1PGLPG58K88",
-              product: "★摄像头产品",
-              activate:"2023-08-29"
+              type: 5,
+              name: "漏水检测仪 - LJD700",
+              number: "R9L8F5D2Z1H3Q",
+              product: "★漏水检测仪",
+              activate: "2023-02-18"
             },
             {
               index: 8,
               isSetup: true,
-              type: 3,
-              name: "摄像头",
-              number:"D1PGLPG58K88",
-              product: "★摄像头产品",
-              activate:"2023-08-29"
+              type: 5,
+              name: "水质在线分析仪 - WZA800",
+              number: "W4T6U9S2R1K3V",
+              product: "★水质在线分析仪",
+              activate: "2021-07-09"
             },
             {
               index: 9,
               isSetup: false,
-              type: 1,
-              name: "摄像头",
-              number:"D1PGLPG58K88",
-              product: "★摄像头产品",
-              activate:"2023-08-29"
+              type: 5,
+              name: "图像识别摄像头 - SCC900",
+              number: "N7G9K4D2B1H3L",
+              product: "★图像识别摄像头",
+              activate: "2023-06-03"
             },
             {
               index: 10,
               isSetup: true,
-              type: 1,
-              name: "摄像头",
-              number:"D1PGLPG58K88",
-              product: "★摄像头产品",
-              activate:"2023-08-29"
+              type: 5,
+              name: "电磁流量计 - EMF1000",
+              number: "E2X9D8C5Z1G3Q",
+              product: "★电磁流量计",
+              activate: "2022-01-15"
             },
             {
               index: 11,
               isSetup: true,
-              type: 5,
-              name: "云数据库",
-              number:"D1PGLPG58K88",
-              product: "★摄像头产品",
-              activate:"2023-08-29"
+              type: 2,
+              name: "超声波液位计 - UCL1100",
+              number: "Y5K7O9N2H1R3D",
+              product: "★超声波液位计",
+              activate: "2021-04-25"
             },
             {
               index: 12,
               isSetup: true,
               type: 2,
-              name: "摄像头",
-              number:"D1PGLPG58K88",
-              product: "★摄像头产品",
-              activate:"2023-08-29"
+              name: "pH值检测仪 - pHD1200",
+              number: "A8S6X2W5T1U3V",
+              product: "★pH值检测仪",
+              activate: "2022-10-10"
             }
           ]
         }

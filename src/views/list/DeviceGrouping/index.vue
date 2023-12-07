@@ -60,7 +60,7 @@ const recursion = value => {
 const onTreeSelectFIr = value => {
   selectinfo.value = [];
   recursion(value);
-  onTreeSelect(selectinfo.value,value);
+  onTreeSelect(selectinfo.value, value);
 };
 const formInline = reactive({
   deviceName: "",
@@ -237,7 +237,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
                                 :size="size"
                                 :icon="useRenderIcon(Upload)"
                               >
-                                上传头像
+                                上传图片
                               </el-button>
                             </el-dropdown-item>
                             <el-dropdown-item>
@@ -248,7 +248,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
                                 :size="size"
                                 :icon="useRenderIcon(Password)"
                               >
-                                重置密码
+                                重置权限
                               </el-button>
                             </el-dropdown-item>
                             <el-dropdown-item>
@@ -259,7 +259,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
                                 :size="size"
                                 :icon="useRenderIcon(Role)"
                               >
-                                分配角色
+                                分配管理员
                               </el-button>
                             </el-dropdown-item>
                           </el-dropdown-menu>

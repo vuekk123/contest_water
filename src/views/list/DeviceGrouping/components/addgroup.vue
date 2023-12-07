@@ -46,7 +46,7 @@ watch(
     immediate: true
   }
 );
-const emit = defineEmits(["close"]);
+const emit = defineEmits(["close", "addgroup"]);
 const close = () => {
   dialogVisible.value = false;
   emit("close", dialogVisible.value);
@@ -96,6 +96,9 @@ const resetForm = (formEl: FormInstance | undefined) => {
   addgroupform.ifhavechild = false;
   addgroupform.chilrenName = "";
 };
+const addgroup = () => {
+  emit("addgroup", addgroupform);
+}
 </script>
 <template>
   <el-dialog
@@ -212,7 +215,7 @@ const resetForm = (formEl: FormInstance | undefined) => {
                     margin-top: 20px;
                   "
                 >
-                  <el-button :icon="Search" type="primary">添加</el-button>
+                  <el-button :icon="Search" type="primary" @click="addgroup">添加</el-button>
                   <el-button :icon="Refresh" @click="resetForm(formRef)"
                     >重置</el-button
                   >

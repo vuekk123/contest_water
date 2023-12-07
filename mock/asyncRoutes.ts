@@ -45,11 +45,10 @@ const systemRouter = {
     }
   ]
 };
-
 const permissionRouter = {
   path: "/permission",
   meta: {
-    title: "menus.permission",
+    title: "运维管理",
     icon: "lollipop",
     rank: permission
   },
@@ -58,7 +57,7 @@ const permissionRouter = {
       path: "/permission/page/index",
       name: "PermissionPage",
       meta: {
-        title: "menus.permissionPage",
+        title: "协议管理",
         roles: ["admin", "common"]
       }
     },
@@ -66,7 +65,7 @@ const permissionRouter = {
       path: "/permission/button/index",
       name: "PermissionButton",
       meta: {
-        title: "menus.permissionButton",
+        title: "采集点模拟",
         roles: ["admin", "common"],
         auths: ["btn_add", "btn_edit", "btn_delete"]
       }

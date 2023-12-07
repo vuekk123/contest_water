@@ -12,7 +12,7 @@ import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 import Lock from "@iconify-icons/ri/lock-fill";
 import Iphone from "@iconify-icons/ep/iphone";
 import User from "@iconify-icons/ri/user-3-fill";
-
+import { registAccount } from "@/api/user";
 const { t } = useI18n();
 const checked = ref(false);
 const loading = ref(false);
@@ -46,6 +46,19 @@ const onUpdate = async (formEl: FormInstance | undefined) => {
   await formEl.validate((valid, fields) => {
     if (valid) {
       if (checked.value) {
+        registAccount({
+          username: ruleForm.username,
+          password: ruleForm.password,
+          tele: ruleForm.phone
+        }).then(data => {
+          if (data) {
+            console.log(data);
+            message(transformI18n($t("login.registerSuccess")), {
+              type: "success"
+            });
+            loading.value = false;
+          }
+        });
         // 模拟请求，需根据实际开发进行修改
         setTimeout(() => {
           message(transformI18n($t("login.registerSuccess")), {

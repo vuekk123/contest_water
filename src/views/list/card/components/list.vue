@@ -30,34 +30,29 @@ watch(
 console.log(props.tableDataMore);
 const columns: TableColumnList = [
   {
-    label: "日期",
-    prop: "date",
+    label: "设备类型",
+    prop: "type",
     width: "260",
     fixed: true
   },
   {
-    label: "姓名",
+    label: "设备型号",
     prop: "name",
     width: "260"
   },
   {
-    label: "地区",
-    prop: "state",
+    label: "设备编号",
+    prop: "number",
     width: "260"
   },
   {
-    label: "城市",
-    prop: "city",
+    label: "设备激活时间",
+    prop: "activate",
     width: "260"
   },
   {
-    label: "地址",
-    prop: "address",
-    width: "260"
-  },
-  {
-    label: "邮编",
-    prop: "post-code",
+    label: "在线状态",
+    prop: "status",
     width: "260"
   },
   {
@@ -103,9 +98,6 @@ onMounted(() => {
       :style="{ height: maxheight }"
       style="overflow: hidden"
     >
-      <!-- <el-button class="mt-4" style="width: 100%" @click="onAddItem">
-        Add Item
-      </el-button> -->
       <pure-table :data="tableData" :columns="columns" :maxHeight="maxheight">
         <template #operation="{ $index }">
           <el-button
@@ -114,7 +106,7 @@ onMounted(() => {
             size="small"
             @click.prevent="deleteRow($index)"
           >
-            Remove
+            删除
           </el-button>
         </template>
       </pure-table>

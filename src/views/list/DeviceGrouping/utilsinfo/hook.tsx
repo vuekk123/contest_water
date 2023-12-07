@@ -79,28 +79,28 @@ export function useUser(tableRef: Ref) {
       minWidth: 130
     },
     {
-      label: "设备权限",
+      label: "设备型号",
       prop: "devicerole",
       minWidth: 130
     },
     {
       label: "设备类型",
-      prop: "location",
+      prop: "type",
       minWidth: 90,
       cellRenderer: ({ row, props }) => (
         <el-tag
           size={props.size}
-          type={row.location === 1 ? "danger" : ""}
+          type={row.type === 1 ? "danger" : ""}
           effect="plain"
         >
-          {row.location === 1 ? "水压感应器" : "智能水阀"}
+          {row.type === 1 ? "水压感应器" : "智能水阀"}
         </el-tag>
       )
     },
     {
-      label: "设备地点",
+      label: "地点",
       prop: "location",
-      minWidth: 90
+      width: 90
     },
     {
       label: "设备编号",

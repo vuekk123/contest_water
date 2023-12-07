@@ -74,14 +74,14 @@ watch(
 );
 
 const rules = {
-  name: [{ required: true, message: "请输入产品名称", trigger: "blur" }]
+  name: [{ required: true, message: "请输入设备名称", trigger: "blur" }]
 };
 </script>
 
 <template>
   <el-dialog
     v-model="formVisible"
-    title="新建产品"
+    title="新建设备"
     :width="680"
     draggable
     :before-close="closeDialog"
@@ -93,27 +93,27 @@ const rules = {
       :rules="rules"
       label-width="100px"
     >
-      <el-form-item label="产品名称" prop="name">
+      <el-form-item label="设备名称" prop="name">
         <el-input
           v-model="formData.name"
           :style="{ width: '480px' }"
-          placeholder="请输入产品名称"
+          placeholder="请输入设备名称"
         />
       </el-form-item>
-      <el-form-item label="产品状态" prop="status">
+      <el-form-item label="设备状态" prop="status">
         <el-radio-group v-model="formData.status">
           <el-radio label="0">已停用</el-radio>
           <el-radio label="1">已启用</el-radio>
         </el-radio-group>
       </el-form-item>
-      <el-form-item label="产品描述" prop="description">
+      <el-form-item label="设备描述" prop="description">
         <el-input
           v-model="formData.description"
           :style="{ width: '480px' }"
-          placeholder="请输入产品描述"
+          placeholder="请输入设备描述"
         />
       </el-form-item>
-      <el-form-item label="产品类型" prop="type">
+      <el-form-item label="设备类型" prop="type">
         <el-select
           v-model="formData.type"
           clearable

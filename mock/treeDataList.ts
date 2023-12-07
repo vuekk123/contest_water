@@ -9,8 +9,8 @@ export default [
         {
           groupID: 9,
           maingroup: 'maingroup',
-          devicename: "只能水阀",
-          devicerole: "admin",
+          devicename: "水质传感器",
+          devicerole: "WaterQualityProbe-3000",
           devicepic:
             "https://ts4.cn.mm.bing.net/th?id=OIP-C.QVHLIDZnp_SuF3SbabnAiQHaHa&w=250&h=250&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2",
           serialNumber: "D1PGLPG58K88",
@@ -23,8 +23,8 @@ export default [
         {
           groupID: 10,
           maingroup: 'secgroup',
-          devicename: "监察摄像头",
-          devicerole: "admin",
+          devicename: "温度传感器",
+          devicerole: "TempSensor-T200",
           devicepic:
             "https://tse1-mm.cn.bing.net/th/id/OIP-C.HiSSJPpDaqeqCZXoTanDWwHaHa?w=201&h=201&c=7&r=0&o=5&dpr=1.5&pid=1.7",
           serialNumber: "SNINC291139SSKO",

@@ -1,8 +1,6 @@
 <script lang="ts" setup>
 import { nextTick, onActivated, onMounted } from "vue";
 import * as echarts from "echarts";
-// 请确保在引入百度地图扩展之前已经引入百度地图 JS API 脚本并成功加载
-// https://api.map.baidu.com/api?v=3.0&ak=你申请的AK
 import "echarts/extension/bmap/bmap";
 import { onBeforeMount, ref } from "vue";
 import { useDetail } from "@/router/hooks";
@@ -62,13 +60,13 @@ const tooltip = {
     htmlStr += "设备编号： " + params.data.serialNumber + "<br />";
     htmlStr += "设备状态： ";
     if (params.data.status == 1) {
-      htmlStr += "<span style='color:#E6A23C'>未激活</span>" + "<br />";
+      htmlStr += "<span style='color:#32CD32'>在线</span>" + "<br />";
     } else if (params.data.status == 2) {
-      htmlStr += "<span style='color:#F56C6C'>禁用</span>" + "<br />";
-    } else if (params.data.status == 3) {
-      htmlStr += "<span style='color:#67C23A'>在线</span>" + "<br />";
-    } else if (params.data.status == 4) {
       htmlStr += "<span style='color:#909399'>离线</span>" + "<br />";
+    } else if (params.data.status == 3) {
+      htmlStr += "<span style='color:#E6A23C'>禁用</span>" + "<br />";
+    } else if (params.data.status == 4) {
+      htmlStr += "<span style='color:#F56C6C'>报警</span>" + "<br />";
     }
     htmlStr += "固件版本： Version " + params.data.firmwareVersion + "<br />";
     htmlStr += "激活时间： " + params.data.activeTime + "<br />";
@@ -91,24 +89,55 @@ function getmap() {
 
   var data = [
     {
-      devicename: "摄像头",
+      devicename: "水流量传感器(FlowMeter-X100)",
       longitude: 120.2,
       latitude: 30.3,
       serialNumber: "D1PGLPG58K88",
       status: 1,
       firmwareVersion: "2.0",
-      activeTime: "2023-11-05"
+      activeTime: "2023-11-05",
+      networkAddress: "杭州上城区"
+    },
+    {
+      devicename: "水质传感器(WaterQualityProbe-3000)",
+      longitude: 120.3,
+      latitude: 30.4,
+      serialNumber: "N67Vak24kv0",
+      status: 2,
+      firmwareVersion: "2.0",
+      activeTime: "2023-11-05",
+      networkAddress: "杭州星桥镇"
+    },
+    {
+      devicename: "温度传感器(TempSensor-T200)",
+      longitude: 120.1,
+      latitude: 30.3,
+      serialNumber: "SI54ZNV38192",
+      status: 3,
+      firmwareVersion: "2.0",
+      activeTime: "2023-11-05",
+      networkAddress: "杭州蒋村街道"
+    },
+    {
+      devicename: "水压传感器(SKU:SEN0257)",
+      longitude: 120.2,
+      latitude: 30.2,
+      serialNumber: "P23NG92SSO7",
+      status: 4,
+      firmwareVersion: "2.0",
+      activeTime: "2023-11-05",
+      networkAddress: "杭州西新镇"
     }
   ];
   // var geoCoordMap = {
   //   摄像头: [121.15, 31.89]
   // };
-  var convertData = function (data) {
+  var convertData = function (data, status) {
     var res = [];
     for (var i = 0; i < data.length; i++) {
       var geoCoord = [data[i].longitude, data[i].latitude];
       // var geoCoord = geoCoordMap[data[i].devicename];
-      if (geoCoord) {
+      if (geoCoord && data[i].status == status) {
         res.push({
           name: data[i].devicename,
           value: geoCoord,
@@ -155,7 +184,7 @@ function getmap() {
     backgroundColor: "transparent",
     title: {
       text: "水务物联网设备分布",
-      subtext: "当前在线设备:" + 2,
+      subtext: "当前在线设备:" + convertData(data, 1).length,
       left: "center",
       textStyle: {
         color: "gray"
@@ -296,14 +325,14 @@ function getmap() {
           // color:'purple',  //涟漪颜色,默认为散点自身颜色
           brushType: "stroke", //动画方式,全填充或只有线条,'stroke'
           period: 4, //动画周期
-          scale: "5" //涟漪规模
+          scale: "4" //涟漪规模
         },
-        data: convertData(data),
+        data: convertData(data, 1),
         encode: {
           value: 2
         },
         symbolSize: function (val) {
-          return 15;
+          return 20;
         },
         label: {
           formatter: "{b}",
@@ -320,16 +349,103 @@ function getmap() {
         tooltip
       },
       {
-        type: "custom",
+        name: "设备详情",
+        type: "effectScatter",
         coordinateSystem: "bmap",
-        renderItem: renderItem,
-        itemStyle: {
-          opacity: 0.5
+        // showEffectOn: "render",
+        rippleEffect: {
+          //设置涟漪动画样式
+          // color:'purple',  //涟漪颜色,默认为散点自身颜色
+          brushType: "fill", //动画方式,全填充或只有线条,'stroke'
+          period: 4, //动画周期
+          scale: "2" //涟漪规模
         },
-        animation: false,
-        silent: true,
-        data: [0],
-        z: -10
+        data: convertData(data, 2),
+        encode: {
+          value: 2
+        },
+        symbolSize: function (val) {
+          return 20;
+        },
+        label: {
+          formatter: "{b}",
+          position: "right"
+        },
+        itemStyle: {
+          color: "#909399"
+        },
+        emphasis: {
+          label: {
+            show: true
+          }
+        },
+        tooltip
+      },
+      {
+        name: "设备详情",
+        type: "effectScatter",
+        coordinateSystem: "bmap",
+        // showEffectOn: "render",
+        rippleEffect: {
+          //设置涟漪动画样式
+          // color:'purple',  //涟漪颜色,默认为散点自身颜色
+          brushType: "fill", //动画方式,全填充或只有线条,'stroke'
+          period: 4, //动画周期
+          scale: "2" //涟漪规模
+        },
+        data: convertData(data, 3),
+        encode: {
+          value: 2
+        },
+        symbolSize: function (val) {
+          return 20;
+        },
+        label: {
+          formatter: "{b}",
+          position: "right"
+        },
+        itemStyle: {
+          color: "#E6A23C"
+        },
+        emphasis: {
+          label: {
+            show: true
+          }
+        },
+        tooltip
+      },
+      {
+        name: "设备详情",
+        type: "effectScatter",
+        coordinateSystem: "bmap",
+        // showEffectOn: "render",
+        rippleEffect: {
+          //设置涟漪动画样式
+          // color:'purple',  //涟漪颜色,默认为散点自身颜色
+          brushType: "fill", //动画方式,全填充或只有线条,'stroke'
+          period: 4, //动画周期
+          scale: "3.5" //涟漪规模
+        },
+        data: convertData(data, 4),
+        encode: {
+          value: 2
+        },
+        symbolSize: function (val) {
+          return 20;
+        },
+        label: {
+          formatter: "{b}",
+          position: "right"
+        },
+        itemStyle: {
+          color: "#F56C6C"
+        },
+        emphasis: {
+          label: {
+            show: true
+          }
+        },
+        tooltip
       }
     ]
   };

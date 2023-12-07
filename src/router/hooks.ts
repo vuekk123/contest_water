@@ -12,7 +12,7 @@ export function useDetail() {
   const route = useRoute();
   const router = useRouter();
   const getParameter = isEmpty(route.params) ? route.query : route.params;
-  const titlesub = ref()
+  const titlesub = ref();
   function toDetail(
     parameter: LocationQueryRaw | RouteParamsRaw,
     model: "query" | "params"
@@ -25,20 +25,21 @@ export function useDetail() {
       }
     });
     if (model === "query") {
-      if (parameter.deviceId.toString().length > 10) {
-        titlesub.value = parameter.deviceId.toString().slice(0,3)+'****'+parameter.deviceId.toString().slice(-2)
-      } else {
-        titlesub.value= parameter.deviceId
+      var title = parameter.deviceId as String;
+      console.log(title);
+      if (title) {
+        title = title.substr(0, 2) + "****" + title.substr(title.length - 2);
       }
+
       // 保存信息到标签页
       useMultiTagsStoreHook().handleTags("push", {
-        path: `/infocard/deviceinfo`,
-        name: "infocard",
+        path: `/welcome/deviceinfo`,
+        name: "deviceinfo",
         query: parameter,
         meta: {
           title: {
-            zh: `设备ID:${titlesub.value} - 详情信息`,
-            en: `deviceinfoID:${parameter.id} - DetailInfo`
+            zh: `设备ID:${title} - 详情信息`,
+            en: `deviceinfoID:${parameter.deviceId} - DetailInfo`
           },
           // 如果使用的是非国际化精简版title可以像下面这么写
           // title: `No.${index} - 详情信息`,
@@ -47,22 +48,7 @@ export function useDetail() {
         }
       });
       // 路由跳转
-      router.push({ name: "infocard", query: parameter });
-    } else if (model === "params") {
-      useMultiTagsStoreHook().handleTags("push", {
-        path: `/tabs/params-detail/:id`,
-        name: "TabParamsDetail",
-        params: parameter,
-        meta: {
-          title: {
-            zh: `No.${parameter.id} - 详情信息`,
-            en: `No.${parameter.id} - DetailInfo`
-          }
-          // 如果使用的是非国际化精简版title可以像下面这么写
-          // title: `No.${index} - 详情信息`,
-        }
-      });
-      router.push({ name: "TabParamsDetail", params: parameter });
+      router.push({ name: "deviceinfo", query: parameter });
     }
   }
 

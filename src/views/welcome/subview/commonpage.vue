@@ -42,8 +42,11 @@ type EChartsOption = echarts.ComposeOption<
   | PieSeriesOption
 >;
 nextTick(() => {
-  moutedforma();
-  moutedformb();
+  // moutedforma();
+  // moutedformb();
+  moutedformc();
+  moutedformd();
+  moutedforme();
 });
 function moutedforma() {
   var chartDom = document.getElementById("forma")!;
@@ -205,15 +208,149 @@ function moutedformb() {
 
   option && myChart.setOption(option);
 }
+function moutedformc() {
+  var chartDom = document.getElementById("formc")!;
+  var myChart = echarts.init(chartDom);
+  var option: EChartsOption;
+
+  option = {
+    title: {
+      text: "cpu使用率",
+      // subtext: "Fake Data",
+      left: "center"
+    },
+    tooltip: {
+      trigger: "item"
+    },
+    legend: {
+      show: true,
+      selectedMode: true,
+      orient: "vertical",
+      left: "right",
+      align: "left"
+    },
+    series: [
+      {
+        name: "Access From",
+        type: "pie",
+        radius: "50%",
+        data: [
+          { value: 97.97, name: "空闲" },
+          { value: 0, name: "系统" },
+          { value: 2.03, name: "用户" }
+        ],
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.5)"
+          }
+        }
+      }
+    ]
+  };
+
+  option && myChart.setOption(option);
+}
+function moutedformd() {
+  var chartDom = document.getElementById("formd")!;
+  var myChart = echarts.init(chartDom);
+  var option: EChartsOption;
+
+  option = {
+    title: {
+      text: "内存使用率",
+      // subtext: "Fake Data",
+      left: "center"
+    },
+    tooltip: {
+      trigger: "item"
+    },
+    legend: {
+      show: true,
+      selectedMode: true,
+      orient: "vertical",
+      left: "right",
+      align: "left"
+    },
+    series: [
+      {
+        name: "Access From",
+        type: "pie",
+        radius: "50%",
+        data: [
+          { value: 1.32, name: "已用" },
+          { value: 2.16, name: "剩余" }
+        ],
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.5)"
+          }
+        }
+      }
+    ]
+  };
+
+  option && myChart.setOption(option);
+}
+function moutedforme() {
+  var chartDom = document.getElementById("forme")!;
+  var myChart = echarts.init(chartDom);
+  var option: EChartsOption;
+
+  option = {
+    title: {
+      text: "系统盘使用率",
+      // subtext: "Fake Data",
+      left: "center"
+    },
+    tooltip: {
+      trigger: "item"
+    },
+    legend: {
+      show: true,
+      selectedMode: true,
+      orient: "vertical",
+      left: "right",
+      align: "left"
+    },
+    series: [
+      {
+        name: "Access From",
+        type: "pie",
+        radius: "50%",
+        data: [
+          { value: 47.3, name: "剩余" },
+          { value: 11.6, name: "已用" }
+        ],
+        emphasis: {
+          itemStyle: {
+            shadowBlur: 10,
+            shadowOffsetX: 0,
+            shadowColor: "rgba(0, 0, 0, 0.5)"
+          }
+        }
+      }
+    ]
+  };
+
+  option && myChart.setOption(option);
+}
 </script>
 <template>
   <div style="display: flex; justify-content: space-around">
     <div
-      id="forma"
+      id="formc"
       style="width: 400px; height: 300px; display: inline-block"
     ></div>
     <div
-      id="formb"
+      id="formd"
+      style="width: 600px; height: 300px; display: inline-block"
+    ></div>
+    <div
+      id="forme"
       style="width: 600px; height: 300px; display: inline-block"
     ></div>
   </div>

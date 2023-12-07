@@ -50,7 +50,7 @@ const message = ref(1);
                     :color="'#666666'"
                     :fontSize="'18px'"
                     :startVal="1"
-                    :endVal="26"
+                    :endVal="4"
                   />
                 </div>
               </div>

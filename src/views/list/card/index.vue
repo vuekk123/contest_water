@@ -84,7 +84,7 @@ const deviceDetails = product => {
   toDetail({ deviceId: product.number }, "query");
   // ElMessageBox.confirm(
   //   product
-  //     ? `确认删除后${product.name}的所有产品信息将被清空, 且无法恢复`
+  //     ? `确认删除后${product.name}的所有设备信息将被清空, 且无法恢复`
   //     : "",
   //   "提示",
   //   {
@@ -136,7 +136,7 @@ onMounted(() => {
         :icon="useRenderIcon(AddFill)"
         @click="formDialogVisible = true"
       >
-        新建产品
+        添加设备
       </el-button>
       <!-- <el-button class="turnlist">Plain</el-button> -->
       <el-button
