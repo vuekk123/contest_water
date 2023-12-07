@@ -75,7 +75,7 @@ declare global {
   /**
    * @description 整体路由配置表（包括完整子路由）
    */
-  interface RouteConfigsTable {
+  interface   RouteConfigsTable {
     /** 路由地址 `必填` */
     path: string;
     /** 路由名字（保持唯一）`可选` */

@@ -39,7 +39,9 @@ export default {
       component: () => import("@/views/components/deviceinfo/index.vue"),
       meta: {
         title: $t("menus.hsdeviceList"),
-        showLink: false
+        showLink: false,
+        activePath: "/list/card",
+        keepAlive: true
       }
     },
     {

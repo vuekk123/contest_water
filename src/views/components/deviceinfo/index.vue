@@ -4,6 +4,8 @@ const { initToDetail, getParameter } = useDetail();
 initToDetail("query");
 import type { TabsPaneContext } from "element-plus";
 import baseinfo from "../soncomponents/baseinfo.vue";
+import deviceUser from "../soncomponents/deviceUser/deviceUser.vue";
+import timing from "../soncomponents/timing/timing.vue";
 import { useMultiTagsStoreHook } from "@/store/modules/multiTags";
 const { router } = useDetail();
 import { ref } from "vue";
@@ -30,15 +32,17 @@ if ("deviceId" in getParameter) {
       class="demo-tabs"
       @tab-click="handleClick"
       tabPosition="left"
+      style="height: 100%"
     >
       <el-tab-pane label="基本信息" name="baseinfo">
         <baseinfo :device="getParameter" />
       </el-tab-pane>
-      <el-tab-pane label="运行状况" name="runstatus">Config</el-tab-pane>
-      <el-tab-pane label="子设备" name="sondevice">Role</el-tab-pane>
-      <el-tab-pane label="设备定时" name="devicetime">Task</el-tab-pane>
-      <el-tab-pane label="设备用户" name="deviceuser">Task</el-tab-pane>
+      <el-tab-pane label="设备定时" name="devicetime"><timing /></el-tab-pane>
+      <el-tab-pane label="设备用户" name="deviceuser"
+        ><deviceUser
+      /></el-tab-pane>
       <el-tab-pane label="事件日志" name="itemrecord">Task</el-tab-pane>
+      <el-tab-pane label="指令日志" name="sondevice">Role</el-tab-pane>
       <el-tab-pane label="实时监测" name="monitoring">Task</el-tab-pane>
       <el-tab-pane label="监测统计" name="monitoringStatistics"
         >Task</el-tab-pane

@@ -1,7 +1,11 @@
 <script setup lang="ts">
 import { ref, watch, reactive } from "vue";
 import type { FormInstance, FormRules } from "element-plus";
-// const deviceObj =
+import { nextTick, onActivated, onMounted } from "vue";
+import * as echarts from "echarts";
+import "echarts/extension/bmap/bmap";
+import { useDetail } from "@/router/hooks";
+const { toDetail, router } = useDetail();
 const deviceNumber = ref();
 const props = defineProps({
   device: {
@@ -20,28 +24,34 @@ watch(
 );
 interface RuleForm {
   name: string;
-  region: string;
-  count: string;
-  date1: string;
-  date2: string;
+  devicetype: string;
+  deviceNum: string;
+  FirmwareVersion: string;
   delivery: boolean;
-  type: string[];
-  resource: string;
   desc: string;
+  TargetingMethod: string;
+  longitude: string;
+  dimension: string;
+  address: string;
+  accessAdress: string;
+  activation: string;
 }
 
 const formSize = ref("default");
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive<RuleForm>({
   name: deviceNumber.value,
-  region: "",
-  count: "",
-  date1: "",
-  date2: "",
+  devicetype: "",
+  deviceNum: "",
+  FirmwareVersion: "",
   delivery: false,
-  type: [],
-  resource: "",
-  desc: ""
+  desc: "",
+  TargetingMethod: "",
+  longitude: "",
+  dimension: "",
+  address: "",
+  accessAdress: "",
+  activation: ""
 });
 
 const rules = reactive<FormRules<RuleForm>>({
@@ -49,156 +59,429 @@ const rules = reactive<FormRules<RuleForm>>({
     { required: true, message: "Please input Activity name", trigger: "blur" },
     { min: 3, max: 5, message: "Length should be 3 to 5", trigger: "blur" }
   ],
-  region: [
+  devicetype: [
     {
       required: true,
       message: "Please select Activity zone",
       trigger: "change"
     }
   ],
-  count: [
-    {
-      required: true,
-      message: "Please select Activity count",
-      trigger: "change"
-    }
+  deviceNum: [
+    { required: true, message: "Please input Activity name", trigger: "blur" },
+    { min: 3, max: 5, message: "Length should be 3 to 5", trigger: "blur" }
   ],
-  date1: [
-    {
-      type: "date",
-      required: true,
-      message: "Please pick a date",
-      trigger: "change"
-    }
-  ],
-  date2: [
-    {
-      type: "date",
-      required: true,
-      message: "Please pick a time",
-      trigger: "change"
-    }
-  ],
-  type: [
-    {
-      type: "array",
-      required: true,
-      message: "Please select at least one activity type",
-      trigger: "change"
-    }
-  ],
-  resource: [
-    {
-      required: true,
-      message: "Please select activity resource",
-      trigger: "change"
-    }
-  ],
-  desc: [
-    { required: true, message: "Please input activity form", trigger: "blur" }
+  FirmwareVersion: [
+    { required: true, message: "Please input Activity name", trigger: "blur" },
+    { min: 3, max: 5, message: "Length should be 3 to 5", trigger: "blur" }
   ]
 });
-
-const submitForm = async (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  await formEl.validate((valid, fields) => {
-    if (valid) {
-      console.log("submit!");
-    } else {
-      console.log("error submit!", fields);
+function loadBMap() {
+  return new Promise(function (resolve, reject) {
+    if (typeof BMap !== "undefined") {
+      resolve(BMap);
+      return true;
     }
+    window.onBMapCallback = function () {
+      resolve(BMap);
+    };
+    // 使用https协议需要添加一下meta标签
+    var protocolStr = document.location.protocol;
+    if (protocolStr == "https:") {
+      let meta = document.createElement("meta");
+      meta.httpEquiv = "Content-Security-Policy";
+      meta.content = "upgrade-insecure-requests";
+      meta.onerror = reject;
+      document.head.appendChild(meta);
+    }
+    // 引入百度地图
+    let script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src =
+      "http://api.map.baidu.com/api?v=2.0&ak=" +
+      "ymIsTuk5HB15Qorioz8hzQDl03KGegmE" +
+      "&__ec_v__=20190126&callback=onBMapCallback";
+    script.onerror = reject;
+    document.head.appendChild(script);
   });
+}
+loadMap();
+function loadMap() {
+  nextTick(() => {
+    loadBMap().then(() => {
+      getmap();
+    });
+  });
+}
+const tooltip = {
+  trigger: "item",
+  formatter: function (params) {
+    var htmlStr = '<div style="padding:5px;line-height:28px;">';
+    htmlStr +=
+      "设备名称： <span style='color:#409EFF'>" +
+      params.data.name +
+      "</span><br />";
+    htmlStr += "设备编号： " + params.data.serialNumber + "<br />";
+    htmlStr += "设备状态： ";
+    if (params.data.status == 1) {
+      htmlStr += "<span style='color:#32CD32'>在线</span>" + "<br />";
+    } else if (params.data.status == 2) {
+      htmlStr += "<span style='color:#909399'>离线</span>" + "<br />";
+    } else if (params.data.status == 3) {
+      htmlStr += "<span style='color:#E6A23C'>禁用</span>" + "<br />";
+    } else if (params.data.status == 4) {
+      htmlStr += "<span style='color:#F56C6C'>报警</span>" + "<br />";
+    }
+    htmlStr += "固件版本： Version " + params.data.firmwareVersion + "<br />";
+    htmlStr += "激活时间： " + params.data.activeTime + "<br />";
+    htmlStr += "所在地址： " + params.data.networkAddress + "<br />";
+    htmlStr += "</div>";
+    return htmlStr;
+  }
 };
+function getmap() {
+  var myChart = echarts.init(document.getElementById("map"));
+  var option;
+  // 格式化数据
+  var option;
 
-const resetForm = (formEl: FormInstance | undefined) => {
-  if (!formEl) return;
-  formEl.resetFields();
-};
+  var data = [
+    {
+      devicename: "水流量传感器(FlowMeter-X100)",
+      longitude: 120.2,
+      latitude: 30.3,
+      serialNumber: "D1PGLPG58K88",
+      status: 1,
+      firmwareVersion: "2.0",
+      activeTime: "2023-11-05",
+      networkAddress: "杭州上城区"
+    },
+    {
+      devicename: "水质传感器(WaterQualityProbe-3000)",
+      longitude: 120.3,
+      latitude: 30.4,
+      serialNumber: "N67Vak24kv0",
+      status: 2,
+      firmwareVersion: "2.0",
+      activeTime: "2023-11-05",
+      networkAddress: "杭州星桥镇"
+    },
+    {
+      devicename: "温度传感器(TempSensor-T200)",
+      longitude: 120.1,
+      latitude: 30.3,
+      serialNumber: "SI54ZNV38192",
+      status: 3,
+      firmwareVersion: "2.0",
+      activeTime: "2023-11-05",
+      networkAddress: "杭州蒋村街道"
+    },
+    {
+      devicename: "水压传感器(SKU:SEN0257)",
+      longitude: 120.2,
+      latitude: 30.2,
+      serialNumber: "P23NG92SSO7",
+      status: 4,
+      firmwareVersion: "2.0",
+      activeTime: "2023-11-05",
+      networkAddress: "杭州西新镇"
+    }
+  ];
+  var convertData = function (data, status) {
+    var res = [];
+    for (var i = 0; i < data.length; i++) {
+      var geoCoord = [data[i].longitude, data[i].latitude];
+      // var geoCoord = geoCoordMap[data[i].devicename];
+      if (geoCoord && data[i].status == status) {
+        res.push({
+          name: data[i].devicename,
+          value: geoCoord,
+          serialNumber: data[i].serialNumber,
+          status: data[i].status,
+          firmwareVersion: data[i].firmwareVersion,
+          networkAddress: data[i].networkAddress,
+          activeTime: data[i].activeTime == null ? "" : data[i].activeTime
+        });
+      }
+    }
+    return res;
+  };
+  function renderItem(params, api) {
+    var coords = [
+      // [116.7, 39.53],
+      // [103.73, 36.03],
+      // [112.91, 27.87],
+      // [120.65, 28.01],
+      // [119.57, 39.95]
+    ];
+    var points = [];
+    for (var i = 0; i < coords.length; i++) {
+      points.push(api.coord(coords[i]));
+    }
+    var color = api.visual("color");
+    return {
+      type: "polygon",
+      shape: {
+        points: echarts.graphic.clipPointsByRect(points, {
+          x: params.coordSys.x,
+          y: params.coordSys.y,
+          width: params.coordSys.width,
+          height: params.coordSys.height
+        })
+      },
+      style: api.style({
+        fill: color,
+        stroke: echarts.color.lift(color)
+      })
+    };
+  }
+  option = {
+    backgroundColor: "transparent",
+    tooltip: {
+      trigger: "item"
+    },
+    bmap: {
+      center: [120.35, 30.3],
+      zoom: 12,
+      roam: true,
+      mapStyle: {}
+    },
+    series: [
+      {
+        name: "设备详情",
+        type: "effectScatter",
+        coordinateSystem: "bmap",
+        showEffectOn: "render",
+        rippleEffect: {
+          //设置涟漪动画样式
+          // color:'purple',  //涟漪颜色,默认为散点自身颜色
+          brushType: "stroke", //动画方式,全填充或只有线条,'stroke'
+          period: 4, //动画周期
+          scale: "4" //涟漪规模
+        },
+        data: convertData(data, 1),
+        encode: {
+          value: 2
+        },
+        symbolSize: function (val) {
+          return 20;
+        },
+        label: {
+          formatter: "{b}",
+          position: "right"
+        },
+        itemStyle: {
+          color: "#32CD32"
+        },
+        emphasis: {
+          label: {
+            show: true
+          }
+        },
+        tooltip
+      },
+      {
+        name: "设备详情",
+        type: "effectScatter",
+        coordinateSystem: "bmap",
+        // showEffectOn: "render",
+        rippleEffect: {
+          //设置涟漪动画样式
+          // color:'purple',  //涟漪颜色,默认为散点自身颜色
+          brushType: "fill", //动画方式,全填充或只有线条,'stroke'
+          period: 4, //动画周期
+          scale: "2" //涟漪规模
+        },
+        data: convertData(data, 2),
+        encode: {
+          value: 2
+        },
+        symbolSize: function (val) {
+          return 20;
+        },
+        label: {
+          formatter: "{b}",
+          position: "right"
+        },
+        itemStyle: {
+          color: "#909399"
+        },
+        emphasis: {
+          label: {
+            show: true
+          }
+        },
+        tooltip
+      },
+      {
+        name: "设备详情",
+        type: "effectScatter",
+        coordinateSystem: "bmap",
+        // showEffectOn: "render",
+        rippleEffect: {
+          //设置涟漪动画样式
+          // color:'purple',  //涟漪颜色,默认为散点自身颜色
+          brushType: "fill", //动画方式,全填充或只有线条,'stroke'
+          period: 4, //动画周期
+          scale: "2" //涟漪规模
+        },
+        data: convertData(data, 3),
+        encode: {
+          value: 2
+        },
+        symbolSize: function (val) {
+          return 20;
+        },
+        label: {
+          formatter: "{b}",
+          position: "right"
+        },
+        itemStyle: {
+          color: "#E6A23C"
+        },
+        emphasis: {
+          label: {
+            show: true
+          }
+        },
+        tooltip
+      },
+      {
+        name: "设备详情",
+        type: "effectScatter",
+        coordinateSystem: "bmap",
+        // showEffectOn: "render",
+        rippleEffect: {
+          //设置涟漪动画样式
+          // color:'purple',  //涟漪颜色,默认为散点自身颜色
+          brushType: "fill", //动画方式,全填充或只有线条,'stroke'
+          period: 4, //动画周期
+          scale: "3.5" //涟漪规模
+        },
+        data: convertData(data, 4),
+        encode: {
+          value: 2
+        },
+        symbolSize: function (val) {
+          return 20;
+        },
+        label: {
+          formatter: "{b}",
+          position: "right"
+        },
+        itemStyle: {
+          color: "#F56C6C"
+        },
+        emphasis: {
+          label: {
+            show: true
+          }
+        },
+        tooltip
+      }
+    ]
+  };
 
-const options = Array.from({ length: 10000 }).map((_, idx) => ({
-  value: `${idx + 1}`,
-  label: `${idx + 1}`
-}));
+  option && myChart.setOption(option);
+}
 </script>
 <!-- <template>{{ deviceNumber }}</template> -->
 <template>
-  <el-form
-    ref="ruleFormRef"
-    :model="ruleForm"
-    :rules="rules"
-    label-width="120px"
-    class="demo-ruleForm"
-    :size="formSize"
-    status-icon
-  >
-    <el-form-item label="设备名称" prop="name">
-      <el-input v-model="ruleForm.name" />
-    </el-form-item>
-    <el-form-item label="设备地点" prop="region">
-      <el-select v-model="ruleForm.region" placeholder="Activity zone">
-        <el-option label="Zone one" value="shanghai" />
-        <el-option label="Zone two" value="beijing" />
-      </el-select>
-    </el-form-item>
-    <el-form-item label="设备编号" prop="count">
-      <el-select-v2
-        v-model="ruleForm.count"
-        placeholder="Activity count"
-        :options="options"
-      />
-    </el-form-item>
-    <el-form-item label="固件版本" required>
-      <el-col :span="11">
-        <el-form-item prop="date1">
-          <el-date-picker
-            v-model="ruleForm.date1"
-            type="date"
-            label="Pick a date"
-            placeholder="Pick a date"
-            style="width: 100%"
-          />
-        </el-form-item>
-      </el-col>
-      <el-col class="text-center" :span="2">
-        <span class="text-gray-500">-</span>
-      </el-col>
-      <el-col :span="11">
-        <el-form-item prop="date2">
-          <el-time-picker
-            v-model="ruleForm.date2"
-            label="Pick a time"
-            placeholder="Pick a time"
-            style="width: 100%"
-          />
-        </el-form-item>
-      </el-col>
-    </el-form-item>
-    <el-form-item label="启动状态" prop="delivery">
-      <el-switch v-model="ruleForm.delivery" />
-    </el-form-item>
-    <el-form-item label="设备类型" prop="type">
-      <el-checkbox-group v-model="ruleForm.type">
-        <el-checkbox label="Online activities" name="type" />
-        <el-checkbox label="Promotion activities" name="type" />
-        <el-checkbox label="Offline activities" name="type" />
-        <el-checkbox label="Simple brand exposure" name="type" />
-      </el-checkbox-group>
-    </el-form-item>
-    <el-form-item label="设备来源" prop="resource">
-      <el-radio-group v-model="ruleForm.resource">
-        <el-radio label="Sponsorship" />
-        <el-radio label="Venue" />
-      </el-radio-group>
-    </el-form-item>
-    <el-form-item label="设备描述" prop="desc">
-      <el-input v-model="ruleForm.desc" type="textarea" />
-    </el-form-item>
-    <el-form-item>
-      <el-button type="primary" @click="submitForm(ruleFormRef)">
-        Create
-      </el-button>
-      <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
-    </el-form-item>
-  </el-form>
+  <div class="outbox">
+    <el-form
+      ref="ruleFormRef"
+      :model="ruleForm"
+      :rules="rules"
+      label-width="120px"
+      class="demo-ruleForm"
+      size="large"
+      status-icon
+      style="width: 45%; height: 100%"
+    >
+      <el-form-item label="设备名称" prop="name">
+        <el-input v-model="ruleForm.name" disabled />
+      </el-form-item>
+      <el-form-item label="设备类型" prop="devicetype">
+        <el-select v-model="ruleForm.devicetype" disabled>
+          <el-option label="流量检测器" value="Flowmeter" />
+          <el-option label="温度传感器" value="temTransducer" />
+          <el-option label="水压感应器" value="pressureSen" />
+          <el-option label="水质传感器" value="waterQuaSen" />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="设备编号" prop="deviceNum">
+        <el-input v-model="ruleForm.deviceNum" disabled />
+      </el-form-item>
+      <el-form-item label="固件版本" prop="FirmwareVersion">
+        <el-input v-model="ruleForm.FirmwareVersion" disabled />
+      </el-form-item>
+      <el-form-item label="启动状态" prop="delivery">
+        <el-switch v-model="ruleForm.delivery" />
+      </el-form-item>
+      <el-form-item label="设备描述" prop="desc">
+        <el-input
+          v-model="ruleForm.desc"
+          type="textarea"
+          style="position: absolute; z-index: 9"
+        />
+      </el-form-item>
+    </el-form>
+    <el-form
+      ref="ruleFormRef"
+      :model="ruleForm"
+      :rules="rules"
+      label-width="120px"
+      class="demo-ruleForm"
+      size="large"
+      status-icon
+      style="width: 45%"
+    >
+      <el-form-item label="定位方式" prop="TargetingMethod">
+        <el-select v-model="ruleForm.TargetingMethod" disabled>
+          <el-option label="自动定位" value="Flowmeter" />
+          <el-option label="设备定位" value="temTransducer" />
+          <el-option label="自定义定位" value="pressureSen" />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="设备经度" prop="longitude">
+        <el-input
+          v-model="ruleForm.longitude"
+          :disabled="ruleForm.TargetingMethod !== 'pressureSen'"
+        />
+      </el-form-item>
+      <el-form-item label="设备维度" prop="dimension">
+        <el-input
+          v-model="ruleForm.dimension"
+          :disabled="ruleForm.TargetingMethod !== 'pressureSen'"
+        />
+      </el-form-item>
+      <el-form-item label="所在地址" prop="address">
+        <el-input v-model="ruleForm.address" disabled />
+      </el-form-item>
+      <el-form-item label="入网地址" prop="accessAdress">
+        <el-input v-model="ruleForm.accessAdress" disabled />
+      </el-form-item>
+      <el-form-item label="激活时间" prop="activation ">
+        <el-input v-model="ruleForm.activation" disabled />
+      </el-form-item>
+    </el-form>
+  </div>
+  <div style="display: flex; justify-content: center; width: 100%">
+    <div id="map" ref="map"></div>
+  </div>
 </template>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.outbox {
+  display: flex;
+}
+#map {
+  width: 80%;
+  height: 438px;
+}
+</style>
+<style lang="scss">
+.mapcontain {
+  .el-form-item__content {
+    margin-left: 0 !important;
+  }
+}
+</style>
