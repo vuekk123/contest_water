@@ -45,6 +45,7 @@ const systemRouter = {
     }
   ]
 };
+
 const permissionRouter = {
   path: "/permission",
   meta: {

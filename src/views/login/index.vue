@@ -49,6 +49,7 @@ import Check from "@iconify-icons/ep/check";
 import User from "@iconify-icons/ri/user-3-fill";
 import Info from "@iconify-icons/ri/information-line";
 import { ElLoading, ElMessage } from "element-plus";
+import { setToken } from "@/utils/auth";
 defineOptions({
   name: "Login"
 });
@@ -83,14 +84,21 @@ const onLogin = async (formEl: FormInstance | undefined) => {
   await formEl.validate((valid, fields) => {
     if (valid) {
       useUserStoreHook()
-        .loginByUsername({ username: ruleForm.username, password: "admin123" })
+        .loginByUsername({
+          username: ruleForm.username,
+          password: ruleForm.password
+        })
         .then(res => {
-          if (res.success) {
+          console.log(res.success);
+          if (res.success === true) {
+            setToken(res.data);
             // 获取后端路由
             initRouter().then(() => {
               router.push(getTopMenu(true).path);
               message("登录成功", { type: "success" });
             });
+          } else {
+            message("登录失败", { type: "warning" });
           }
         })
         .finally(() => (loading.value = false));
