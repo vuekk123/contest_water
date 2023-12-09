@@ -38,7 +38,10 @@ const INITIAL_DATA = {
   status: "",
   description: "",
   type: "",
-  mark: ""
+  number: "",
+  Mqttacc: "",
+  Mqttpas: "",
+  deviceCode: ""
 };
 
 const pagination = ref({ current: 1, pageSize: 12, total: 0 });

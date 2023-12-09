@@ -4,10 +4,10 @@ import { message } from "@/utils/message";
 import { FormInstance } from "element-plus";
 
 const SELECT_OPTIONS = [
-  { label: "网关", value: 1 },
-  { label: "人工智能", value: 2 },
-  { label: "CVM", value: 3 },
-  { label: "防火墙", value: 4 },
+  { label: "水流量传感器", value: 1 },
+  { label: "水温传感器", value: 2 },
+  { label: "水质传感器", value: 3 },
+  { label: "水压传感器", value: 4 },
   { label: "未知", value: 5 }
 ];
 
@@ -129,12 +129,32 @@ const rules = {
           </el-option>
         </el-select>
       </el-form-item>
-      <el-form-item label="备注" prop="mark">
+      <el-form-item label="设备编号" prop="number">
         <el-input
-          v-model="textareaValue"
-          type="textarea"
+          v-model="formData.number"
           :style="{ width: '480px' }"
-          placeholder="请输入内容"
+          placeholder="请输入设备描述"
+        />
+      </el-form-item>
+      <el-form-item label="Mqtt账户" prop="Mqttacc">
+        <el-input
+          v-model="formData.Mqttacc"
+          :style="{ width: '480px' }"
+          placeholder="请输入设备描述"
+        />
+      </el-form-item>
+      <el-form-item label="Mqtt密码" prop="Mqttpas">
+        <el-input
+          v-model="formData.Mqttpas"
+          :style="{ width: '480px' }"
+          placeholder="请输入设备描述"
+        />
+      </el-form-item>
+      <el-form-item label="设备秘钥" prop="deviceCode">
+        <el-input
+          v-model="formData.deviceCode"
+          :style="{ width: '480px' }"
+          placeholder="请输入设备描述"
         />
       </el-form-item>
     </el-form>

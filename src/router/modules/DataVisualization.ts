@@ -4,7 +4,6 @@ import { Monitor, Location, Platform } from "@element-plus/icons-vue";
 
 export default {
   path: "/screen",
-  redirect: "/screen/index",
   meta: {
     icon: Monitor,
     title: "数据可视化",
@@ -13,21 +12,21 @@ export default {
   children: [
     {
       path: "/screen/index",
-      name: "dataVplatform",
-      component: () => import("@/views/DataVisualization/dataVplatform.vue"),
+      name: "https://miyuesc.github.io/data-visualization/",
       meta: {
         icon: Location,
-        title: "大数据可视化平台"
+        title: "大数据可视化平台",
+        frameSrc: "https://miyuesc.github.io/data-visualization/"
       }
     },
     {
       path: "/screen/manage",
-      name: "screenManagement",
-      component: () => import("@/views/DataVisualization/screenManagement.vue"),
+      name: "http://localhost:5173/#/project/items",
       meta: {
         icon: Platform,
-        title: "大屏管理"
+        title: "大屏管理",
+        frameSrc: "http://localhost:5173/#/project/items"
       }
     }
   ]
-} as RouteConfigsTable;
+};

@@ -5,20 +5,19 @@ import { addDialog } from "@/components/ReDialog";
 import { type PaginationProps } from "@pureadmin/table";
 import type { FormItemProps } from "../utils/types";
 import { hideTextAtIndex } from "@pureadmin/utils";
-import { getUserList } from "@/api/system";
+import { getagreement } from "@/api/agreement";
 import { type Ref, h, ref, toRaw, reactive, onMounted } from "vue";
 
 export function useUser(tableRef: Ref, treeRef: Ref) {
   const form = reactive({
     // 左侧部门树的id
-    deptId: "",
-    username: "",
-    phone: "",
-    status: ""
+    name: ""
   });
   const formRef = ref();
   const dataList = ref([]);
   const loading = ref(true);
+  // 上传头像信息
+  const switchLoadMap = ref({});
   const higherDeptOptions = ref();
   const selectedNum = ref(0);
   const pagination = reactive<PaginationProps>({
@@ -29,41 +28,33 @@ export function useUser(tableRef: Ref, treeRef: Ref) {
   });
   const columns: TableColumnList = [
     {
-      label: "名称",
-      prop: "id",
-      width: 90
-    },
-    {
-      label: "描述",
-      prop: "username",
-      minWidth: 130
-    },
-    {
-      label: "用户类型",
-      prop: "sex",
-      minWidth: 90,
+      label: "协议名称",
+      prop: "name",
+      width: 90,
       cellRenderer: ({ row, props }) => (
-        <el-tag
-          size={props.size}
-          type={row.sex === 1 ? "danger" : ""}
-          effect="plain"
-        >
-          {row.sex === 1 ? "女" : "男"}
-        </el-tag>
+        <el-tag size={props.size}>{row.name}</el-tag>
       )
     },
     {
-      label: "手机号码",
-      prop: "phone",
-      minWidth: 90,
-      formatter: ({ phone }) => hideTextAtIndex(phone, { start: 3, end: 6 })
+      label: "协议编码",
+      prop: "encoding",
+      minWidth: 130
     },
     {
-      label: "备注",
+      label: "上传地址",
+      prop: "address",
+      minWidth: 90
+    },
+    {
+      label: "协议类型",
+      prop: "type",
+      minWidth: 90
+      // formatter: ({ phone }) => hideTextAtIndex(phone, { start: 3, end: 6 })
+    },
+    {
+      label: "协议摘要",
       minWidth: 90,
-      prop: "createTime",
-      formatter: ({ createTime }) =>
-        dayjs(createTime).format("YYYY-MM-DD HH:mm:ss")
+      prop: "summary"
     },
     {
       label: "操作",
@@ -88,7 +79,7 @@ export function useUser(tableRef: Ref, treeRef: Ref) {
 
   async function onSearch() {
     loading.value = true;
-    const { data } = await getUserList(toRaw(form));
+    const { data } = await getagreement(toRaw(form));
     dataList.value = data.list;
     pagination.total = data.total;
     pagination.pageSize = data.pageSize;
@@ -102,7 +93,6 @@ export function useUser(tableRef: Ref, treeRef: Ref) {
   const resetForm = formEl => {
     if (!formEl) return;
     formEl.resetFields();
-    form.deptId = "";
     // treeRef.value.onTreeReset();
     onSearch();
   };
@@ -119,22 +109,27 @@ export function useUser(tableRef: Ref, treeRef: Ref) {
     return newTreeList;
   }
 
-  function openDialog(title = "添加", row?: FormItemProps) {
+  function openDialog(title = "新增", row?: FormItemProps) {
     addDialog({
-      title: `${title}定时`,
+      title: `${title}协议`,
       props: {
         formInline: {
           title,
-          higherDeptOptions: formatHigherDeptOptions(higherDeptOptions.value),
-          parentId: row?.dept.id ?? 0,
-          nickname: row?.nickname ?? "",
-          username: row?.username ?? "",
-          password: row?.password ?? "",
-          phone: row?.phone ?? "",
-          email: row?.email ?? "",
-          sex: row?.sex ?? "",
-          status: row?.status ?? 1,
-          remark: row?.remark ?? ""
+          name: row?.name ?? "",
+          encoding: row?.encoding ?? "",
+          address: row?.address ?? "",
+          type: row?.type ?? "",
+          summary: row?.summary ?? ""
+          // higherDeptOptions: formatHigherDeptOptions(higherDeptOptions.value)
+          // parentId: row?.dept.id ?? 0,
+          // nickname: row?.nickname ?? "",
+          // username: row?.username ?? "",
+          // password: row?.password ?? "",
+          // phone: row?.phone ?? "",
+          // email: row?.email ?? "",
+          // sex: row?.sex ?? "",
+          // status: row?.status ?? 1,
+          // remark: row?.remark ?? ""
         }
       },
       width: "46%",
@@ -146,7 +141,7 @@ export function useUser(tableRef: Ref, treeRef: Ref) {
         const FormRef = formRef.value.getRef();
         const curData = options.props.formInline as FormItemProps;
         function chores() {
-          message(`您${title}了用户名称为${curData.username}的这条数据`, {
+          message(`您${title}了协议名称为${curData.name}的这条数据`, {
             type: "success"
           });
           done(); // 关闭弹框

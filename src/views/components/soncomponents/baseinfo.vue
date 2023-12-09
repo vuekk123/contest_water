@@ -40,18 +40,18 @@ interface RuleForm {
 const formSize = ref("default");
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive<RuleForm>({
-  name: deviceNumber.value,
-  devicetype: "",
-  deviceNum: "",
-  FirmwareVersion: "",
-  delivery: false,
-  desc: "",
-  TargetingMethod: "",
-  longitude: "",
-  dimension: "",
-  address: "",
-  accessAdress: "",
-  activation: ""
+  name: "水流量传感器",
+  devicetype: "Flowmeter",
+  deviceNum: deviceNumber.value,
+  FirmwareVersion: "Version2.0",
+  delivery: true,
+  desc: "测量水流量",
+  TargetingMethod: "temTransducer",
+  longitude: "120.2",
+  dimension: "30.3",
+  address: "杭州天杭试验学校",
+  accessAdress: "110.155.115.72",
+  activation: "2023-11-06 14:06:34"
 });
 
 const rules = reactive<FormRules<RuleForm>>({
@@ -154,36 +154,6 @@ function getmap() {
       firmwareVersion: "2.0",
       activeTime: "2023-11-05",
       networkAddress: "杭州上城区"
-    },
-    {
-      devicename: "水质传感器(WaterQualityProbe-3000)",
-      longitude: 120.3,
-      latitude: 30.4,
-      serialNumber: "N67Vak24kv0",
-      status: 2,
-      firmwareVersion: "2.0",
-      activeTime: "2023-11-05",
-      networkAddress: "杭州星桥镇"
-    },
-    {
-      devicename: "温度传感器(TempSensor-T200)",
-      longitude: 120.1,
-      latitude: 30.3,
-      serialNumber: "SI54ZNV38192",
-      status: 3,
-      firmwareVersion: "2.0",
-      activeTime: "2023-11-05",
-      networkAddress: "杭州蒋村街道"
-    },
-    {
-      devicename: "水压传感器(SKU:SEN0257)",
-      longitude: 120.2,
-      latitude: 30.2,
-      serialNumber: "P23NG92SSO7",
-      status: 4,
-      firmwareVersion: "2.0",
-      activeTime: "2023-11-05",
-      networkAddress: "杭州西新镇"
     }
   ];
   var convertData = function (data, status) {
@@ -240,8 +210,8 @@ function getmap() {
       trigger: "item"
     },
     bmap: {
-      center: [120.35, 30.3],
-      zoom: 12,
+      center: [120.21, 30.29],
+      zoom: 15,
       roam: true,
       mapStyle: {}
     },
@@ -402,7 +372,7 @@ function getmap() {
       </el-form-item>
       <el-form-item label="设备类型" prop="devicetype">
         <el-select v-model="ruleForm.devicetype" disabled>
-          <el-option label="流量检测器" value="Flowmeter" />
+          <el-option label="水流量检测器" value="Flowmeter" />
           <el-option label="温度传感器" value="temTransducer" />
           <el-option label="水压感应器" value="pressureSen" />
           <el-option label="水质传感器" value="waterQuaSen" />

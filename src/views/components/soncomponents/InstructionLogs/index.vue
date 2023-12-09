@@ -1,66 +1,68 @@
-<script lang="ts" setup>
+<script setup lang="ts">
 import { ref } from "vue";
-import { useUser } from "./utils/hook";
+import { useRole } from "./utils/hook";
 import { PureTableBar } from "@/components/RePureTableBar";
 import { useRenderIcon } from "@/components/ReIcon/src/hooks";
 
-import Upload from "@iconify-icons/ri/upload-line";
-import Role from "@iconify-icons/ri/admin-line";
-import Password from "@iconify-icons/ri/lock-password-line";
-import More from "@iconify-icons/ep/more-filled";
+// import Database from "@iconify-icons/ri/database-2-line";
+// import More from "@iconify-icons/ep/more-filled";
 import Delete from "@iconify-icons/ep/delete";
 import EditPen from "@iconify-icons/ep/edit-pen";
 import Search from "@iconify-icons/ep/search";
 import Refresh from "@iconify-icons/ep/refresh";
+import Menu from "@iconify-icons/ep/menu";
 import AddFill from "@iconify-icons/ri/add-circle-line";
 
 defineOptions({
-  name: "User"
+  name: "Role"
 });
 
-const treeRef = ref();
 const formRef = ref();
-const tableRef = ref();
-
 const {
   form,
   loading,
   columns,
   dataList,
-  selectedNum,
   pagination,
   onSearch,
   resetForm,
-  openDialog,
+  handleMenu,
   handleDelete,
   handleSizeChange,
-  handleCurrentChange
-} = useUser(tableRef, treeRef);
+  handleCurrentChange,
+  handleSelectionChange
+} = useRole();
 </script>
+
 <template>
-  <div style="height: 100% !important">
+  <div class="main">
     <el-form
       ref="formRef"
       :inline="true"
       :model="form"
       class="search-form bg-bg_color w-[99/100] pl-8 pt-[12px]"
     >
-      <el-form-item label="用户名称：" prop="username">
-        <el-input
-          v-model="form.username"
-          placeholder="请输入用户名称"
+      <el-form-item label="日志类型" prop="type">
+        <el-select
+          v-model="form.type"
+          placeholder="请选择状态"
           clearable
-          class="!w-[160px]"
+          class="!w-[180px]"
+        >
+          <el-option label="服务下发" value="0" />
+          <el-option label="属性获取" value="1" />
+          <el-option label="OTA升级" value="2" />
+        </el-select>
+      </el-form-item>
+      <el-form-item label="指令名称" prop="name">
+        <el-input
+          v-model="form.name"
+          placeholder="请输入角色标识"
+          clearable
+          class="!w-[180px]"
         />
       </el-form-item>
-      <el-form-item label="手机号码：" prop="phone">
-        <el-input
-          v-model="form.phone"
-          placeholder="请输入手机号码"
-          clearable
-          class="!w-[160px]"
-        />
-      </el-form-item>
+
       <el-form-item>
         <el-button
           type="primary"
@@ -76,25 +78,15 @@ const {
       </el-form-item>
     </el-form>
 
-    <PureTableBar title="设备定时" :columns="columns" @refresh="onSearch">
-      <template #buttons>
-        <el-button
-          type="primary"
-          :icon="useRenderIcon(AddFill)"
-          @click="openDialog()"
-        >
-          添加定时
-        </el-button>
-      </template>
+    <PureTableBar title="事件日志" :columns="columns" @refresh="onSearch">
       <template v-slot="{ size, dynamicColumns }">
         <pure-table
-          row-key="id"
-          ref="tableRef"
-          adaptive
           align-whole="center"
+          showOverflowTooltip
           table-layout="auto"
           :loading="loading"
           :size="size"
+          adaptive
           :data="dataList"
           :columns="dynamicColumns"
           :pagination="pagination"
@@ -103,6 +95,7 @@ const {
             background: 'var(--el-fill-color-light)',
             color: 'var(--el-text-color-primary)'
           }"
+          @selection-change="handleSelectionChange"
           @page-size-change="handleSizeChange"
           @page-current-change="handleCurrentChange"
         >
@@ -117,8 +110,18 @@ const {
             >
               修改
             </el-button>
+            <el-button
+              class="reset-margin"
+              link
+              type="primary"
+              :size="size"
+              :icon="useRenderIcon(Menu)"
+              @click="handleMenu"
+            >
+              菜单权限
+            </el-button>
             <el-popconfirm
-              :title="`是否确认删除用户编号为${row.id}的这条数据`"
+              :title="`是否确认删除角色名称为${row.name}的这条数据`"
               @confirm="handleDelete(row)"
             >
               <template #reference>
@@ -139,13 +142,10 @@ const {
     </PureTableBar>
   </div>
 </template>
+
 <style scoped lang="scss">
 :deep(.el-dropdown-menu__item i) {
   margin: 0;
-}
-
-:deep(.el-button:focus-visible) {
-  outline: none;
 }
 
 .search-form {
