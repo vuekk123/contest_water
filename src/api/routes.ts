@@ -6,9 +6,9 @@ type Result = {
   data: Array<any>;
 };
 // baseUrlApi("getAsyncRoutes")
-export const getAsyncRoutes = () => {
-  return http.request<Result>("get", baseUrlApi("getAsyncRoutes"));
-};
 // export const getAsyncRoutes = () => {
-//   return http.request<Result>("get", "/get-async-routes");
+//   return http.request<Result>("get", baseUrlApi("getAsyncRoutes"));
 // };
+export const getAsyncRoutes = () => {
+  return http.request<Result>("get", "/get-async-routes");
+};

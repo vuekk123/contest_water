@@ -12,11 +12,11 @@ export default {
   children: [
     {
       path: "/screen/index",
-      name: "https://miyuesc.github.io/data-visualization/",
+      name: "http://localhost:5173/#/chart/home/2pitrw2w52a000",
       meta: {
         icon: Location,
         title: "大数据可视化平台",
-        frameSrc: "https://miyuesc.github.io/data-visualization/"
+        frameSrc: "http://localhost:5173/#/chart/home/2pitrw2w52a000"
       }
     },
     {

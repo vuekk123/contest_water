@@ -152,7 +152,7 @@ const cardLogoClass = computed(() => [
 
   &_detail {
     flex: 1;
-    min-height: 140px;
+    max-height: 238px;
     padding: 24px 32px;
 
     &--logo {

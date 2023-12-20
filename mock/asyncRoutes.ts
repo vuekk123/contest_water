@@ -61,15 +61,6 @@ const permissionRouter = {
         title: "协议管理",
         roles: ["admin", "common"]
       }
-    },
-    {
-      path: "/permission/button/index",
-      name: "PermissionButton",
-      meta: {
-        title: "采集点模拟",
-        roles: ["admin", "common"],
-        auths: ["btn_add", "btn_edit", "btn_delete"]
-      }
     }
   ]
 };

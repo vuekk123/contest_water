@@ -5,7 +5,6 @@ import "echarts/extension/bmap/bmap";
 import { onBeforeMount, ref } from "vue";
 import { useDetail } from "@/router/hooks";
 const { toDetail, router } = useDetail();
-//接受父组件传过来的参数
 const props = defineProps({
   flag: {
     type: Number,
@@ -129,9 +128,6 @@ function getmap() {
       networkAddress: "杭州西新镇"
     }
   ];
-  // var geoCoordMap = {
-  //   摄像头: [121.15, 31.89]
-  // };
   var convertData = function (data, status) {
     var res = [];
     for (var i = 0; i < data.length; i++) {
