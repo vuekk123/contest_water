@@ -98,7 +98,11 @@ const onLogin = async (formEl: FormInstance | undefined) => {
               message("登录成功", { type: "success" });
             });
           } else {
-            message("登录失败", { type: "warning" });
+            if (res.data == null) {
+              message("登录失败,密码错误", { type: "warning" });
+            } else {
+              message(res.data.warn, { type: "warning" });
+            }
           }
         })
         .finally(() => (loading.value = false));

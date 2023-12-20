@@ -14,6 +14,7 @@ export type UserResult = {
     refreshToken: string;
     /** `accessToken`的过期时间（格式'xxxx/xx/xx xx:xx:xx'） */
     expires: Date;
+    warn: String;
   };
 };
 
@@ -31,7 +32,7 @@ export type RefreshTokenResult = {
 
 /** 登录 */
 export const getLogin = (data?: object) => {
-  return http.request<UserResult>("post", "/login", {
+  return http.request<UserResult>("post", baseUrlApi("userPasswordLogin"), {
     data
   });
 };
